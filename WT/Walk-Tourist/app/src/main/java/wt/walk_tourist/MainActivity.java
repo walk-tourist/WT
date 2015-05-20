@@ -1,17 +1,20 @@
 package wt.walk_tourist;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
-
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        this.findViewById(R.id.button_tourist_spot).setOnClickListener(this);
     }
 
     @Override
@@ -34,5 +37,15 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.button_tourist_spot) {
+            Intent intent = new Intent();
+            // ここで設定するパッケージ名（wt.walk_tourist）はAvdroidManifest.xmlで設定しているアプリケーションのパッケージ名であることに注意！！
+            intent.setClassName("wt.walk_tourist","wt.walk_tourist.settings.TouristSpotActivity");
+            startActivity(intent);
+        }
     }
 }

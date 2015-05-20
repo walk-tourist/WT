@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- 参考にしたサイト：
+    リストビュー：http://androidguide.nomaki.jp/html/layout/listview/listviewMain.html
+    リストビューカスタマイズの仕方：http://techbooster.jpn.org/andriod/ui/1282/
+    -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+
+        <!--
+         ご当地を象徴するようなキャラクタの画像を挿入したらどうだろうか？
+         ※キャラクターが不明の内は？みたいにしておくとか
+         あと、なんかImageViewのレイアウトの指定方法間違ってるかもしれんっす。
+         つづく、TextViewのマージンをとっても画像の右端からにならないのはなぜだろうか？
+         それはそういものだったけ、忘れた・・・・
+         -->
+        <ImageView
+            android:id="@+id/tourist_spot_list_item_spot_chara"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/sleeping_kuma"/>
+
+        <TextView
+            android:id="@+id/tourist_spot_list_item_spot_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="50dp"
+            android:textSize="20dp"/>
+
+        <TextView
+            android:id="@+id/tourist_spot_list_item_spot_count"
+            android:layout_alignRight="@+id/tourist_spot_list_item_spot_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:textSize="20dp"/>
+    </RelativeLayout>
+
+</LinearLayout>
