@@ -1,9 +1,21 @@
 <resources>
+    <!-- app_info -->
     <string name="app_name">Walk-Tourist</string>
+    <!-- // app_info -->
 
+    <!-- menu_main -->
     <string name="action_settings">Settings</string>
+    <!-- // menu_main -->
 
+    <!-- top -->
+    <string name="button_tourist_spot">観光地List</string>
+    <string name="button_display_map">Map表示</string>
+    <string name="button_start_game">ゲーム</string>
+    <!-- // top -->
+
+    <!-- tourist_spot -->
     <string name="tourist_spot_back_button_home">HOME</string>
     <string name="tourist_spot_back_button_before">戻る</string>
+    <!-- // tourist_spot -->
 
 </resources>

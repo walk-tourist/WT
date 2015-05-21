@@ -1,6 +1,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" tools:context=".MainActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="@drawable/top_background">
     <fragment
         android:id="@+id/setting_tourist_spot_fragment"
         android:name="wt.walk_tourist.settings.TouristSpotFragment"
@@ -11,19 +14,40 @@
     <LinearLayout
         android:layout_below="@+id/setting_tourist_spot_fragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="トップ画面"/>
+            android:text="現在地"/>
 
-        <Button
-            android:id="@+id/button_tourist_spot"
-            android:text="観光地List"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+        <LinearLayout
+            android:layout_below="@+id/top_buttons"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/button_tourist_spot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/button_tourist_spot"/>
+            <Button
+                android:id="@+id/button_display_map"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/button_display_map"/>
+            <Button
+                android:id="@+id/button_start_game"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:text="@string/button_start_game"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 
