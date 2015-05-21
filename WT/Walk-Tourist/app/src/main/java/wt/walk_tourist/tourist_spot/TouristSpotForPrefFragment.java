@@ -1,20 +1,10 @@
-package wt.walk_tourist.settings;
+package wt.walk_tourist.tourist_spot;
 
-import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wt.walk_tourist.R;
-import wt.walk_tourist.settings.utility.SettingsUtilty;
+import wt.walk_tourist.tourist_spot.utility.SettingsUtilty;
 
 
 public class TouristSpotForPrefFragment extends TouristSpotFragment {
@@ -31,8 +21,11 @@ public class TouristSpotForPrefFragment extends TouristSpotFragment {
     private int selectedSpotNo;
 
     @Override
-    public void showList(View v) {
-        v.findViewById(R.id.settings_tourist_spot_fragment_main_layout).setVisibility(View.VISIBLE);
+    public void setViewItems(View v) {
+        // フラグメントを複数重ねた時に下のフラグメントでクリックイベントに応答するのを防止
+        v.findViewById(R.id.tourist_spot_fragment_layout).setOnClickListener(this);
+
+        v.findViewById(R.id.tourist_spot_fragment_main_layout).setVisibility(View.VISIBLE);
 
         // バックボタンの名称をセットする
         ((TextView)v.findViewById(R.id.tourist_spot_back_button)).setText(getResources().getString(R.string.tourist_spot_back_button_home));
@@ -40,9 +33,10 @@ public class TouristSpotForPrefFragment extends TouristSpotFragment {
         // バックボタンのリスナーをセットする
         v.findViewById(R.id.tourist_spot_back_button).setOnClickListener(this);
 
-        // 観光地エリアをセットする
-        ((TextView)v.findViewById(R.id.tourist_spot_area)).setText("観光地エリア");
+    }
 
+    @Override
+    public void showList(View v) {
         // 観光地Listのデータを作成
         List<TouristSpotData> touristSpotDatas = new ArrayList<TouristSpotData>();
 
@@ -130,7 +124,6 @@ public class TouristSpotForPrefFragment extends TouristSpotFragment {
             fragmentTransaction.commit();
 
         } else if (view.getId() == R.id.listView1) {
-            // TODO タッチした観光地の詳細へ
             // TODO FragmentからFragmentへの値の渡し方はどのようにすればよいか
             SettingsUtilty.outputOperationLog("観光地を選択しました。");
 
@@ -139,7 +132,7 @@ public class TouristSpotForPrefFragment extends TouristSpotFragment {
 
             TouristSpotForBorFragment touristSpotForBorFragment = new TouristSpotForBorFragment();
 
-            fragmentTransaction.add(R.id.setting_tourist_spot_fragment, touristSpotForBorFragment, "観光地-市町村");
+            fragmentTransaction.add(R.id.setting_tourist_spot_fragment, touristSpotForBorFragment, "touristSpotForBorFragment");
             fragmentTransaction.addToBackStack(null);
 
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

@@ -3,15 +3,12 @@ package wt.walk_tourist;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 
-import wt.walk_tourist.settings.TouristSpotForPrefFragment;
-import wt.walk_tourist.settings.utility.SettingsUtilty;
+import wt.walk_tourist.game.GameContentsFragment;
+import wt.walk_tourist.tourist_spot.TouristSpotForPrefFragment;
+import wt.walk_tourist.tourist_spot.utility.SettingsUtilty;
 
 public class MainActivity extends Activity implements View.OnClickListener{
 
@@ -21,6 +18,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
 
         this.findViewById(R.id.button_tourist_spot).setOnClickListener(this);
+        this.findViewById(R.id.button_start_game).setOnClickListener(this);
     }
 
 //    @Override
@@ -55,14 +53,14 @@ public class MainActivity extends Activity implements View.OnClickListener{
             startActivity(intent);
             */
 
-            SettingsUtilty.outputOperationLog("観光地リストを押下しました。");
+            SettingsUtilty.outputOperationLog("観光地Listを押下しました。");
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             TouristSpotForPrefFragment touristSpotForPrefFragment = new TouristSpotForPrefFragment();
 
-            fragmentTransaction.add(R.id.setting_tourist_spot_fragment, touristSpotForPrefFragment, "観光地-都道府県");
+            fragmentTransaction.add(R.id.setting_tourist_spot_fragment, touristSpotForPrefFragment, "touristSpotForPrefFragment");
             fragmentTransaction.addToBackStack(null);
 
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -70,6 +68,20 @@ public class MainActivity extends Activity implements View.OnClickListener{
             // TODO 標準のバックキーを押下すると、アクティビティ自体が終了してしまう・・・・
             // TODO バックキーを押したときは現在表示中のフラグメントを閉じて、アクティビティは閉じないようにしたい。
             // TODO ActionBarActivityをActivityに変更すると正常に動作する
+
+            fragmentTransaction.commit();
+        } else if (view.getId() == R.id.button_start_game) {
+            SettingsUtilty.outputOperationLog("ゲームを押下しました。");
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            GameContentsFragment gameContentsFragment = new GameContentsFragment();
+
+            fragmentTransaction.add(R.id.setting_tourist_spot_fragment, gameContentsFragment, "gameContentsFragment");
+            fragmentTransaction.addToBackStack(null);
+
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
             fragmentTransaction.commit();
         }

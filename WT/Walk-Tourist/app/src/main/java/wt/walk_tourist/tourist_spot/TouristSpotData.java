@@ -1,4 +1,4 @@
-package wt.walk_tourist.settings;
+package wt.walk_tourist.tourist_spot;
 
 /**
  * Created by User on 2015/05/09.

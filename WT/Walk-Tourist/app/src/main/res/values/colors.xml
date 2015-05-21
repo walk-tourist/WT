@@ -1,0 +1,11 @@
+<resources>
+    <!-- tourist_spot -->
+    <color name="tourist_spot_backgroud_color">#550000FF</color>
+    <!--     <color name="tourist_spot_backgroud_color">#74A9D6</color> -->
+    <!-- // tourist_spot -->
+
+    <!-- game_contents -->
+    <color name="game_contents_backgroud_color">#55000000</color>
+    <!-- // game_contents -->
+
+</resources>

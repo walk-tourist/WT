@@ -1,4 +1,4 @@
-package wt.walk_tourist.settings.utility;
+package wt.walk_tourist.tourist_spot.utility;
 
 import android.util.Log;
 
@@ -11,6 +11,6 @@ public class SettingsUtilty {
      * @param operation 操作名
      */
     public static void outputOperationLog(String operation) {
-        Log.v("LookLife", "Fragment-LifeCycle-OPE：" + operation);
+        Log.v("Walk-Tourist", "operationLog：" + operation);
     }
 }

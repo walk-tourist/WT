@@ -1,4 +1,4 @@
-package wt.walk_tourist.settings;
+package wt.walk_tourist.tourist_spot;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -27,7 +27,7 @@ public class TouristSpotListAdapter extends ArrayAdapter<TouristSpotData> {
         TouristSpotData item = (TouristSpotData)getItem(position);
 
         if (null == convertView) {
-            convertView = layoutInflater.inflate(R.layout.settings_tourist_spot_list_item, null);
+            convertView = layoutInflater.inflate(R.layout.tourist_spot_list_item, null);
         }
 
         // 観光地名

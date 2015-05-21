@@ -1,4 +1,4 @@
-package wt.walk_tourist.settings;
+package wt.walk_tourist.tourist_spot;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,17 +12,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wt.walk_tourist.R;
-import wt.walk_tourist.settings.utility.SettingsUtilty;
+import wt.walk_tourist.tourist_spot.utility.SettingsUtilty;
 
 
 public class TouristSpotForBorFragment extends TouristSpotFragment {
 
-    // 選択した観光地（県）
+    // 選択した観光地（市町村）
     private int selectedSpotNo;
 
     @Override
-    public void showList(View v) {
-        v.findViewById(R.id.settings_tourist_spot_fragment_main_layout).setVisibility(View.VISIBLE);
+    public void setViewItems(View v) {
+        // フラグメントを複数重ねた時に下のフラグメントでクリックイベントに応答するのを防止
+        v.findViewById(R.id.tourist_spot_fragment_layout).setOnClickListener(this);
+
+        v.findViewById(R.id.tourist_spot_fragment_main_layout).setVisibility(View.VISIBLE);
 
         // バックボタンの名称をセットする
         ((TextView)v.findViewById(R.id.tourist_spot_back_button)).setText(getResources().getString(R.string.tourist_spot_back_button_before));
@@ -31,13 +34,21 @@ public class TouristSpotForBorFragment extends TouristSpotFragment {
         v.findViewById(R.id.tourist_spot_back_button).setOnClickListener(this);
 
         // 観光地エリアをセットする
-        ((TextView)v.findViewById(R.id.tourist_spot_area)).setText("観光地エリア");
+        ((TextView)v.findViewById(R.id.tourist_spot_area)).setText("京都府");
+    }
 
+    @Override
+    public void showList(View v) {
         // 観光地Listのデータを作成
         List<TouristSpotData> touristSpotDatas = new ArrayList<TouristSpotData>();
 
-        touristSpotDatas.add(new TouristSpotData("京都府　京都市", "50/100"));
-        touristSpotDatas.add(new TouristSpotData("京都府　東京都市","50/101"));
+        touristSpotDatas.add(new TouristSpotData("京都市", "50/100"));
+        touristSpotDatas.add(new TouristSpotData("福知山市","50/101"));
+        touristSpotDatas.add(new TouristSpotData("永谷園市","50/101"));
+        touristSpotDatas.add(new TouristSpotData("尼崎市","50/101"));
+        touristSpotDatas.add(new TouristSpotData("福寿円","50/101"));
+        touristSpotDatas.add(new TouristSpotData("八坂","50/101"));
+        touristSpotDatas.add(new TouristSpotData("五右衛門","50/101"));
 
         TouristSpotListAdapter touristSpotListAdapter = new TouristSpotListAdapter(getActivity(), 0, touristSpotDatas);
 
@@ -75,20 +86,15 @@ public class TouristSpotForBorFragment extends TouristSpotFragment {
             fragmentTransaction.commit();
 
         } else if (view.getId() == R.id.listView1) {
-            // TODO タッチした観光地の詳細へ
             // TODO FragmentからFragmentへの値の渡し方はどのようにすればよいか
-
-
-            // TODO 都道府県 →市町村ときたので次は、場所詳細のリストのフラグメントを呼ぶ　まだフラグメント自体作ってません。
-
             SettingsUtilty.outputOperationLog("観光地を選択しました。");
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            TouristSpotForBorFragment touristSpotForBorFragment = new TouristSpotForBorFragment();
+            TouristSpotForSpotFragment touristSpotForSpotFragment = new TouristSpotForSpotFragment();
 
-            fragmentTransaction.add(R.id.setting_tourist_spot_fragment, touristSpotForBorFragment, "観光地-市町村");
+            fragmentTransaction.add(R.id.setting_tourist_spot_fragment, touristSpotForSpotFragment, "touristSpotForSpotFragment");
             fragmentTransaction.addToBackStack(null);
 
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

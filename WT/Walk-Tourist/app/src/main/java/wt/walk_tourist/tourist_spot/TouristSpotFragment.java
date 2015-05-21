@@ -1,15 +1,12 @@
-package wt.walk_tourist.settings;
+package wt.walk_tourist.tourist_spot;
 
 import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import wt.walk_tourist.R;
-import wt.walk_tourist.settings.utility.SettingsUtilty;
 
 
 public class TouristSpotFragment extends Fragment implements View.OnClickListener {
@@ -17,7 +14,10 @@ public class TouristSpotFragment extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View v = inflater.inflate(R.layout.settings_tourist_spot_fragment, container, false);
+        View v = inflater.inflate(R.layout.tourist_spot_fragment, container, false);
+
+        // 画面表示項目をセット
+        setViewItems(v);
 
         // リスト表示処理
         showList(v);
@@ -26,7 +26,16 @@ public class TouristSpotFragment extends Fragment implements View.OnClickListene
     }
 
     /**
+     * 画面表示項目をセット
+     * @param v
+     */
+    public void setViewItems(View v) {
+        // TODO 継承先で実装
+    }
+
+    /**
      * リスト表示処理
+     * @param v
      */
     protected void showList(View v) {
         // TODO 継承先で実装

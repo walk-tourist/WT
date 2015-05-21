@@ -25,7 +25,7 @@
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
-            android:src="@drawable/sleeping_kuma"/>
+            android:src="@drawable/building"/>
 
         <TextView
             android:id="@+id/tourist_spot_list_item_spot_name"

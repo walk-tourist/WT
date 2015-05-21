@@ -6,7 +6,7 @@
     android:background="@drawable/top_background">
     <fragment
         android:id="@+id/setting_tourist_spot_fragment"
-        android:name="wt.walk_tourist.settings.TouristSpotFragment"
+        android:name="wt.walk_tourist.tourist_spot.TouristSpotFragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
     </fragment>
@@ -49,7 +49,5 @@
         </LinearLayout>
 
     </LinearLayout>
-
-
 
 </RelativeLayout>

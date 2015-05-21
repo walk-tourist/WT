@@ -16,6 +16,12 @@
     <!-- tourist_spot -->
     <string name="tourist_spot_back_button_home">HOME</string>
     <string name="tourist_spot_back_button_before">戻る</string>
+    <string name="tourist_spot_list_title">観光地List</string>
     <!-- // tourist_spot -->
+
+    <!-- game -->
+    <string name="game_contents_back_button_home">HOME</string>
+    <string name="game_contents_list_title">ゲームList</string>
+    <!-- // game -->
 
 </resources>

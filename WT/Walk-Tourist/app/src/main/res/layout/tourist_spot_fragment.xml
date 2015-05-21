@@ -1,18 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:id="@+id/tourist_spot_fragment_layout">
 
     <LinearLayout
+        android:id="@+id/tourist_spot_fragment_main_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:background="#74A9D6"
+        android:paddingLeft="@dimen/tourist_spot_horizontal_margin"
+        android:paddingRight="@dimen/tourist_spot_horizontal_margin"
+        android:paddingTop="@dimen/tourist_spot_vertical_margin"
+        android:paddingBottom="@dimen/tourist_spot_vertical_margin"
+        android:background="@drawable/tourist_spot_background"
         android:orientation="vertical"
-        android:id="@+id/settings_tourist_spot_fragment_main_layout"
         android:visibility="gone" >
 
         <RelativeLayout
@@ -24,9 +25,9 @@
                 android:id="@+id/tourist_spot_list_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="観光地List"
                 android:textSize="30dp"
-                android:layout_marginLeft="5dp"/>
+                android:layout_marginLeft="5dp"
+                android:text="@string/tourist_spot_list_title"/>
             <!-- // title -->
             <!-- home_button -->
             <Button
@@ -34,8 +35,10 @@
                 android:layout_alignBaseline="@+id/tourist_spot_list_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text=""
-                android:textSize="30dp"
+                android:textSize="25dp"
+                android:background="#FFFFFF"
                 android:layout_alignParentRight="true" />
             <!-- // home_button -->
         </RelativeLayout>
