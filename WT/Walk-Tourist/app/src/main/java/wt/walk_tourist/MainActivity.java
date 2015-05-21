@@ -1,5 +1,8 @@
 package wt.walk_tourist;
 
+import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,7 +10,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends ActionBarActivity implements View.OnClickListener{
+import wt.walk_tourist.settings.TouristSpotForPrefFragment;
+import wt.walk_tourist.settings.utility.SettingsUtilty;
+
+public class MainActivity extends Activity implements View.OnClickListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,35 +23,55 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
         this.findViewById(R.id.button_tourist_spot).setOnClickListener(this);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        // Inflate the menu; this adds items to the action bar if it is present.
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        // Handle action bar item clicks here. The action bar will
+//        // automatically handle clicks on the Home/Up button, so long
+//        // as you specify a parent activity in AndroidManifest.xml.
+//        int id = item.getItemId();
+//
+//        //noinspection SimplifiableIfStatement
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.button_tourist_spot) {
+            /*
             Intent intent = new Intent();
             // ここで設定するパッケージ名（wt.walk_tourist）はAvdroidManifest.xmlで設定しているアプリケーションのパッケージ名であることに注意！！
             intent.setClassName("wt.walk_tourist","wt.walk_tourist.settings.TouristSpotActivity");
             startActivity(intent);
+            */
+
+            SettingsUtilty.outputOperationLog("観光地リストを押下しました。");
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            TouristSpotForPrefFragment touristSpotForPrefFragment = new TouristSpotForPrefFragment();
+
+            fragmentTransaction.add(R.id.setting_tourist_spot_fragment, touristSpotForPrefFragment, "観光地-都道府県");
+            fragmentTransaction.addToBackStack(null);
+
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+            // TODO 標準のバックキーを押下すると、アクティビティ自体が終了してしまう・・・・
+            // TODO バックキーを押したときは現在表示中のフラグメントを閉じて、アクティビティは閉じないようにしたい。
+            // TODO ActionBarActivityをActivityに変更すると正常に動作する
+
+            fragmentTransaction.commit();
         }
     }
 }

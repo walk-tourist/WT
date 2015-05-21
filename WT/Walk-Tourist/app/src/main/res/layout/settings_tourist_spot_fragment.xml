@@ -1,15 +1,19 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
-    android:background="#74A9D6">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:background="#74A9D6"
+        android:orientation="vertical"
+        android:id="@+id/settings_tourist_spot_fragment_main_layout"
+        android:visibility="gone" >
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -17,24 +21,34 @@
             android:orientation="horizontal">
             <!-- title -->
             <TextView
-                android:id="@+id/trip_list_title"
+                android:id="@+id/tourist_spot_list_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="観光地List"
                 android:textSize="30dp"
-                android:layout_marginLeft="10dp"/>
+                android:layout_marginLeft="5dp"/>
             <!-- // title -->
             <!-- home_button -->
             <Button
+                android:id="@+id/tourist_spot_back_button"
+                android:layout_alignBaseline="@+id/tourist_spot_list_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/trip_list_title"
-                android:text="HOME"
+                android:text=""
                 android:textSize="30dp"
-                android:layout_alignParentRight="true"/>
+                android:layout_alignParentRight="true" />
             <!-- // home_button -->
         </RelativeLayout>
 
+        <!-- tourist_spot_area -->
+        <TextView
+            android:id="@+id/tourist_spot_area"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:layout_marginLeft="10dp"
+            android:text="" />
+        <!-- // tourist_spot_area -->
 
         <ListView
             android:id="@+id/listView1"
