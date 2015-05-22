@@ -94,7 +94,7 @@ public class TouristSpotForBorFragment extends TouristSpotFragment {
 
             TouristSpotForSpotFragment touristSpotForSpotFragment = new TouristSpotForSpotFragment();
 
-            fragmentTransaction.add(R.id.setting_tourist_spot_fragment, touristSpotForSpotFragment, "touristSpotForSpotFragment");
+            fragmentTransaction.add(R.id.main_fragment, touristSpotForSpotFragment, "touristSpotForSpotFragment");
             fragmentTransaction.addToBackStack(null);
 
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

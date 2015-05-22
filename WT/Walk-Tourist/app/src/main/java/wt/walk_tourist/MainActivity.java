@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import wt.walk_tourist.game.GameContentsFragment;
+import wt.walk_tourist.point_management.PointManagementFragment;
 import wt.walk_tourist.tourist_spot.TouristSpotForPrefFragment;
 import wt.walk_tourist.tourist_spot.utility.SettingsUtilty;
 
@@ -19,6 +20,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
         this.findViewById(R.id.button_tourist_spot).setOnClickListener(this);
         this.findViewById(R.id.button_start_game).setOnClickListener(this);
+        this.findViewById(R.id.button_point_management).setOnClickListener(this);
     }
 
 //    @Override
@@ -60,7 +62,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
             TouristSpotForPrefFragment touristSpotForPrefFragment = new TouristSpotForPrefFragment();
 
-            fragmentTransaction.add(R.id.setting_tourist_spot_fragment, touristSpotForPrefFragment, "touristSpotForPrefFragment");
+            fragmentTransaction.add(R.id.main_fragment, touristSpotForPrefFragment, "touristSpotForPrefFragment");
             fragmentTransaction.addToBackStack(null);
 
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
@@ -78,7 +80,21 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
             GameContentsFragment gameContentsFragment = new GameContentsFragment();
 
-            fragmentTransaction.add(R.id.setting_tourist_spot_fragment, gameContentsFragment, "gameContentsFragment");
+            fragmentTransaction.add(R.id.main_fragment, gameContentsFragment, "gameContentsFragment");
+            fragmentTransaction.addToBackStack(null);
+
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+            fragmentTransaction.commit();
+        } else if (view.getId() == R.id.button_point_management) {
+            SettingsUtilty.outputOperationLog("ポイントを押下しました。");
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            PointManagementFragment pointManagementFragment = new PointManagementFragment();
+
+            fragmentTransaction.add(R.id.main_fragment, pointManagementFragment, "pointManagementFragment");
             fragmentTransaction.addToBackStack(null);
 
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

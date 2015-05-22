@@ -24,4 +24,9 @@
     <string name="game_contents_list_title">ゲームList</string>
     <!-- // game -->
 
+    <!-- game -->
+    <string name="point_management_back_button_home">HOME</string>
+    <string name="point_management_title">ポイント管理</string>
+    <!-- // game -->
+
 </resources>

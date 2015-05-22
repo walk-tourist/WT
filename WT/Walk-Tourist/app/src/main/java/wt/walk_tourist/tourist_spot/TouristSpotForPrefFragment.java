@@ -132,7 +132,7 @@ public class TouristSpotForPrefFragment extends TouristSpotFragment {
 
             TouristSpotForBorFragment touristSpotForBorFragment = new TouristSpotForBorFragment();
 
-            fragmentTransaction.add(R.id.setting_tourist_spot_fragment, touristSpotForBorFragment, "touristSpotForBorFragment");
+            fragmentTransaction.add(R.id.main_fragment, touristSpotForBorFragment, "touristSpotForBorFragment");
             fragmentTransaction.addToBackStack(null);
 
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

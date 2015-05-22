@@ -42,9 +42,6 @@ public class GameContentsFragment extends Fragment implements View.OnClickListen
 
         v.findViewById(R.id.game_contents_fragment_main_layout).setVisibility(View.VISIBLE);
 
-        // バックボタンの名称をセットする
-        ((TextView)v.findViewById(R.id.game_contents_back_button)).setText(getResources().getString(R.string.game_contents_back_button_home));
-
         // バックボタンのリスナーをセットする
         v.findViewById(R.id.game_contents_back_button).setOnClickListener(this);
 

@@ -42,13 +42,13 @@ public class TouristSpotForSpotFragment extends TouristSpotFragment {
         List<TouristSpotData> touristSpotDatas = new ArrayList<TouristSpotData>();
 
         // TODO カメラ画像が差し込めるようにリストの項目を修正しよう！！
-        touristSpotDatas.add(new TouristSpotData("金閣寺", "　",R.drawable.building,  false));
-        touristSpotDatas.add(new TouristSpotData("比叡山", "　",R.drawable.building,  false));
-        touristSpotDatas.add(new TouristSpotData("銀閣寺", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("金閣寺", "　",R.drawable.jiin,  false));
+        touristSpotDatas.add(new TouristSpotData("比叡山", "　",R.drawable.mountain,  false));
+        touristSpotDatas.add(new TouristSpotData("銀閣寺", "　",R.drawable.jiin,  false));
         touristSpotDatas.add(new TouristSpotData("祇園四条", "　",R.drawable.building,  false));
-        touristSpotDatas.add(new TouristSpotData("東寺", "　",R.drawable.building,  true));
+        touristSpotDatas.add(new TouristSpotData("東寺", "　",R.drawable.jiin,  true));
         touristSpotDatas.add(new TouristSpotData("円山公園", "　",R.drawable.building,  false));
-        touristSpotDatas.add(new TouristSpotData("八坂神社", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("八坂神社", "　",R.drawable.jinja,  false));
         touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
         touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
         touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
