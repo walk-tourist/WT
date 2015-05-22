@@ -42,18 +42,20 @@ public class TouristSpotForSpotFragment extends TouristSpotFragment {
         List<TouristSpotData> touristSpotDatas = new ArrayList<TouristSpotData>();
 
         // TODO カメラ画像が差し込めるようにリストの項目を修正しよう！！
-        touristSpotDatas.add(new TouristSpotData("金閣寺", "　"));
-        touristSpotDatas.add(new TouristSpotData("比叡山","　"));
-        touristSpotDatas.add(new TouristSpotData("銀閣寺","　"));
-        touristSpotDatas.add(new TouristSpotData("祇園四条","　"));
-        touristSpotDatas.add(new TouristSpotData("東寺","　"));
-        touristSpotDatas.add(new TouristSpotData("円山公園","　"));
-        touristSpotDatas.add(new TouristSpotData("八坂神社","　"));
-        touristSpotDatas.add(new TouristSpotData("先斗町","　"));
-
-
-
-        TouristSpotListAdapter touristSpotListAdapter = new TouristSpotListAdapter(getActivity(), 0, touristSpotDatas);
+        touristSpotDatas.add(new TouristSpotData("金閣寺", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("比叡山", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("銀閣寺", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("祇園四条", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("東寺", "　",R.drawable.building,  true));
+        touristSpotDatas.add(new TouristSpotData("円山公園", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("八坂神社", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
+        TouristSpotListAdapter touristSpotListAdapter = new TouristSpotListAdapter(getActivity(), R.layout.tourist_spot_list_item, touristSpotDatas);
 
         // リストビューにデータを設定
         ListView prefectureListView = (ListView)v.findViewById(R.id.listView1);

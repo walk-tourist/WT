@@ -42,15 +42,15 @@ public class TouristSpotForBorFragment extends TouristSpotFragment {
         // 観光地Listのデータを作成
         List<TouristSpotData> touristSpotDatas = new ArrayList<TouristSpotData>();
 
-        touristSpotDatas.add(new TouristSpotData("京都市", "50/100"));
-        touristSpotDatas.add(new TouristSpotData("福知山市","50/101"));
-        touristSpotDatas.add(new TouristSpotData("永谷園市","50/101"));
-        touristSpotDatas.add(new TouristSpotData("尼崎市","50/101"));
-        touristSpotDatas.add(new TouristSpotData("福寿円","50/101"));
-        touristSpotDatas.add(new TouristSpotData("八坂","50/101"));
-        touristSpotDatas.add(new TouristSpotData("五右衛門","50/101"));
+        touristSpotDatas.add(new TouristSpotData("京都市","50/101",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("福知山市","50/101",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("永谷園市","50/101",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("尼崎市","50/101",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("福寿円","50/101",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("八坂","50/101",R.drawable.building,  false));
+        touristSpotDatas.add(new TouristSpotData("五右衛門","50/101",R.drawable.building,  false));
 
-        TouristSpotListAdapter touristSpotListAdapter = new TouristSpotListAdapter(getActivity(), 0, touristSpotDatas);
+        TouristSpotListAdapter touristSpotListAdapter = new TouristSpotListAdapter(getActivity(), R.layout.tourist_spot_list_item, touristSpotDatas);
 
         // リストビューにデータを設定
         ListView prefectureListView = (ListView)v.findViewById(R.id.listView1);

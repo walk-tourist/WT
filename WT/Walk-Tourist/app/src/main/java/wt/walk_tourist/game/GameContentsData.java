@@ -10,9 +10,13 @@ public class GameContentsData {
     /** ゲームコンテンツ名 */
     private String contentsName;
 
+    /** ゲーム画像 */
+    private int contentsImage;
+
     // コンストラクタ
-    GameContentsData(String contentsName) {
+    GameContentsData(String contentsName, int contentsImage) {
         this.contentsName = contentsName;
+        this.contentsImage = contentsImage;
     }
 
     public int getContentsId() {
@@ -25,5 +29,9 @@ public class GameContentsData {
 
     public String getContentsName() {
         return contentsName;
+    }
+
+    public int getContentsImage() {
+        return contentsImage;
     }
 }

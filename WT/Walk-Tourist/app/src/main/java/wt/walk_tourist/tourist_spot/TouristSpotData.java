@@ -13,10 +13,24 @@ public class TouristSpotData {
     /** 観光地数 */
     private String spotCount;
 
-    // コンストラクタ
-    TouristSpotData(String spotName, String spotCount) {
+    /** 観光地イメージ画像 */
+    private int spotImage;
+
+    /** カメラアイコン表示フラグ */
+    private boolean cameraImageFlag;
+
+    /**
+     * コンストラクタ
+     * @param spotName
+     * @param spotCount
+     * @param spotImage
+     * @param cameraImageFlag
+     */
+    TouristSpotData(String spotName, String spotCount, int spotImage, boolean cameraImageFlag) {
         this.spotName = spotName;
         this.spotCount = spotCount;
+        this.spotImage = spotImage;
+        this.cameraImageFlag = cameraImageFlag;
     }
 
     public int getSpotId() {
@@ -35,4 +49,11 @@ public class TouristSpotData {
         return spotCount;
     }
 
+    public int getSpotImage() {
+        return spotImage;
+    }
+
+    public boolean isCameraImageFlag() {
+        return cameraImageFlag;
+    }
 }

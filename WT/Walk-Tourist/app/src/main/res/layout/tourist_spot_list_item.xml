@@ -21,7 +21,7 @@
          それはそういものだったけ、忘れた・・・・
          -->
         <ImageView
-            android:id="@+id/tourist_spot_list_item_spot_chara"
+            android:id="@+id/tourist_spot_list_item_spot_image"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
@@ -43,6 +43,15 @@
             android:layout_alignParentRight="true"
             android:textSize="20dp"
             android:hint="観光地数"/>
+
+        <ImageView
+            android:id="@+id/tourist_spot_list_item_spot_camera"
+            android:layout_alignRight="@+id/tourist_spot_list_item_spot_name"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:textSize="20dp"/>
+
     </RelativeLayout>
 
 </LinearLayout>

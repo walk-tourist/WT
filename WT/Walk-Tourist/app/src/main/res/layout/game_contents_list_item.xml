@@ -10,7 +10,7 @@
         android:padding="10dp">
 
         <ImageView
-            android:id="@+id/game_contents_list_item_game_chara"
+            android:id="@+id/game_contents_list_item_game_image"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"

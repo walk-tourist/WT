@@ -54,13 +54,13 @@ public class GameContentsFragment extends Fragment implements View.OnClickListen
         // 観光地Listのデータを作成
         List<GameContentsData> gameContentsDatas = new ArrayList<GameContentsData>();
 
-        gameContentsDatas.add(new GameContentsData("黒ひげ危機一髪"));
-        gameContentsDatas.add(new GameContentsData("大人のUNO"));
-        gameContentsDatas.add(new GameContentsData("実録 オセロ"));
-        gameContentsDatas.add(new GameContentsData("拝啓：僕は元気です。"));
-        gameContentsDatas.add(new GameContentsData("間違いさがし"));
+        gameContentsDatas.add(new GameContentsData("黒ひげ危機一髪", R.drawable.doll));
+        gameContentsDatas.add(new GameContentsData("大人のUNO", R.drawable.game_contents_background));
+        gameContentsDatas.add(new GameContentsData("実録 オセロ", R.drawable.doll));
+        gameContentsDatas.add(new GameContentsData("拝啓：僕は元気です。", R.drawable.doll));
+        gameContentsDatas.add(new GameContentsData("間違いさがし", R.drawable.doll));
 
-        GameContentsListAdapter gameContentsListAdapter = new GameContentsListAdapter(getActivity(), 0, gameContentsDatas);
+        GameContentsListAdapter gameContentsListAdapter = new GameContentsListAdapter(getActivity(), R.layout.game_contents_list_item, gameContentsDatas);
 
         // リストビューにデータを設定
         ListView prefectureListView = (ListView)v.findViewById(R.id.listView1);
