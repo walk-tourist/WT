@@ -1,25 +1,17 @@
 package wt.walk_tourist.point_management;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import wt.walk_tourist.R;
-import wt.walk_tourist.game.GameContentsData;
-import wt.walk_tourist.game.GameContentsListAdapter;
+import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
+import wt.walk_tourist.game.D_Game_Contents;
 
-public class PointManagementFragment extends Fragment implements View.OnClickListener {
+public class MDF_PointManagement extends WT_MainDisplayFragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

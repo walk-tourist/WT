@@ -3,7 +3,7 @@ package wt.walk_tourist.game;
 /**
  * Created by User on 2015/05/09.
  */
-public class GameContentsData {
+public class D_Game_Contents {
     /** ゲームコンテンツID */
     private int contentsId;
 
@@ -14,7 +14,7 @@ public class GameContentsData {
     private int contentsImage;
 
     // コンストラクタ
-    GameContentsData(String contentsName, int contentsImage) {
+    D_Game_Contents(String contentsName, int contentsImage) {
         this.contentsName = contentsName;
         this.contentsImage = contentsImage;
     }

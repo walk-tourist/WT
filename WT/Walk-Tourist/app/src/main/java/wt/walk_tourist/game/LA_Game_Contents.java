@@ -16,10 +16,10 @@ import wt.walk_tourist.R;
 /**
  * Created by User on 2015/05/09.
  */
-public class GameContentsListAdapter extends BaseAdapter {
+public class LA_Game_Contents extends BaseAdapter {
     private final Context context;
     private final int layoutId;
-    private final List<GameContentsData> list;
+    private final List<D_Game_Contents> list;
 
     @Override
     public int getCount() {
@@ -42,7 +42,7 @@ public class GameContentsListAdapter extends BaseAdapter {
      * @param layoutId
      * @param list
      */
-    public GameContentsListAdapter(Context context, int layoutId, List<GameContentsData> list) {
+    public LA_Game_Contents(Context context, int layoutId, List<D_Game_Contents> list) {
         super();
         this.context =context;
         this.layoutId = layoutId;
@@ -57,7 +57,7 @@ public class GameContentsListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
-        GameContentsData item = (GameContentsData)getItem(position);
+        D_Game_Contents item = (D_Game_Contents)getItem(position);
 
         if (null == convertView) {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

@@ -1,6 +1,5 @@
 package wt.walk_tourist.game;
 
-import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -15,9 +14,11 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-import wt.walk_tourist.R;
 
-public class GameContentsFragment extends Fragment implements View.OnClickListener {
+import wt.walk_tourist.R;
+import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
+
+public class MDF_Game_Contents extends WT_MainDisplayFragment implements View.OnClickListener {
 
     // 選択したゲームコンテンツ
     private int selectedSpotNo;
@@ -27,11 +28,6 @@ public class GameContentsFragment extends Fragment implements View.OnClickListen
         super.onCreateView(inflater, container, savedInstanceState);
         View v = inflater.inflate(R.layout.game_contents_fragment, container, false);
 
-        // 画面表示項目をセット
-        setViewItems(v);
-
-        // リスト表示処理
-        showList(v);
 
         return v;
     }
@@ -49,15 +45,15 @@ public class GameContentsFragment extends Fragment implements View.OnClickListen
 
     private void showList(View v) {
         // 観光地Listのデータを作成
-        List<GameContentsData> gameContentsDatas = new ArrayList<GameContentsData>();
+        List<D_Game_Contents> gameContentsDatas = new ArrayList<D_Game_Contents>();
 
-        gameContentsDatas.add(new GameContentsData("黒ひげ危機一髪", R.drawable.doll));
-        gameContentsDatas.add(new GameContentsData("大人のUNO", R.drawable.game_contents_background));
-        gameContentsDatas.add(new GameContentsData("実録 オセロ", R.drawable.doll));
-        gameContentsDatas.add(new GameContentsData("拝啓：僕は元気です。", R.drawable.doll));
-        gameContentsDatas.add(new GameContentsData("間違いさがし", R.drawable.doll));
+        gameContentsDatas.add(new D_Game_Contents("黒ひげ危機一髪", R.drawable.doll));
+        gameContentsDatas.add(new D_Game_Contents("大人のUNO", R.drawable.game_contents_background));
+        gameContentsDatas.add(new D_Game_Contents("実録 オセロ", R.drawable.doll));
+        gameContentsDatas.add(new D_Game_Contents("拝啓：僕は元気です。", R.drawable.doll));
+        gameContentsDatas.add(new D_Game_Contents("間違いさがし", R.drawable.doll));
 
-        GameContentsListAdapter gameContentsListAdapter = new GameContentsListAdapter(getActivity(), R.layout.game_contents_list_item, gameContentsDatas);
+        LA_Game_Contents gameContentsListAdapter = new LA_Game_Contents(getActivity(), R.layout.game_contents_list_item, gameContentsDatas);
 
         // リストビューにデータを設定
         ListView prefectureListView = (ListView)v.findViewById(R.id.listView1);
@@ -70,10 +66,10 @@ public class GameContentsFragment extends Fragment implements View.OnClickListen
                 ListView listView = (ListView)parent;
 
                 // タップした観光地IDをセットする
-                selectedSpotNo = ((GameContentsData)listView.getItemAtPosition(position)).getContentsId();
+                selectedSpotNo = ((D_Game_Contents)listView.getItemAtPosition(position)).getContentsId();
 
                 // 動作確認ダイアログを表示
-                Toast.makeText(getActivity(), ((GameContentsData) listView.getItemAtPosition(position)).getContentsName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), ((D_Game_Contents) listView.getItemAtPosition(position)).getContentsName(), Toast.LENGTH_SHORT).show();
 
                 onClick(listView);
 

@@ -3,7 +3,7 @@ package wt.walk_tourist.tourist_spot;
 /**
  * Created by User on 2015/05/09.
  */
-public class TouristSpotData {
+public class D_TouristSpot {
     /** 観光地ID */
     private int spotId;
 
@@ -26,7 +26,7 @@ public class TouristSpotData {
      * @param spotImage
      * @param cameraImageFlag
      */
-    TouristSpotData(String spotName, String spotCount, int spotImage, boolean cameraImageFlag) {
+    D_TouristSpot(String spotName, String spotCount, int spotImage, boolean cameraImageFlag) {
         this.spotName = spotName;
         this.spotCount = spotCount;
         this.spotImage = spotImage;

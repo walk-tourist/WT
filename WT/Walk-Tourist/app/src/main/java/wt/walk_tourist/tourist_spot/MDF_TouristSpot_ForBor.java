@@ -12,11 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wt.walk_tourist.R;
+import wt.walk_tourist.tourist_spot.utility.SettingsUtilty;
 
 
-public class TouristSpotForSpotFragment extends TouristSpotFragment {
+public class MDF_TouristSpot_ForBor extends MDF_TouristSpot {
 
-    // 選択した観光地（場所）
+    // 選択した観光地（市町村）
     private int selectedSpotNo;
 
     @Override
@@ -33,29 +34,23 @@ public class TouristSpotForSpotFragment extends TouristSpotFragment {
         v.findViewById(R.id.tourist_spot_back_button).setOnClickListener(this);
 
         // 観光地エリアをセットする
-        ((TextView)v.findViewById(R.id.tourist_spot_area)).setText("京都府京都市");
+        ((TextView)v.findViewById(R.id.tourist_spot_area)).setText("京都府");
     }
 
     @Override
     public void showList(View v) {
         // 観光地Listのデータを作成
-        List<TouristSpotData> touristSpotDatas = new ArrayList<TouristSpotData>();
+        List<D_TouristSpot> touristSpotDatas = new ArrayList<D_TouristSpot>();
 
-        // TODO カメラ画像が差し込めるようにリストの項目を修正しよう！！
-        touristSpotDatas.add(new TouristSpotData("金閣寺", "　",R.drawable.jiin,  false));
-        touristSpotDatas.add(new TouristSpotData("比叡山", "　",R.drawable.mountain,  false));
-        touristSpotDatas.add(new TouristSpotData("銀閣寺", "　",R.drawable.jiin,  false));
-        touristSpotDatas.add(new TouristSpotData("祇園四条", "　",R.drawable.building,  false));
-        touristSpotDatas.add(new TouristSpotData("東寺", "　",R.drawable.jiin,  true));
-        touristSpotDatas.add(new TouristSpotData("円山公園", "　",R.drawable.building,  false));
-        touristSpotDatas.add(new TouristSpotData("八坂神社", "　",R.drawable.jinja,  false));
-        touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
-        touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
-        touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
-        touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
-        touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
-        touristSpotDatas.add(new TouristSpotData("先斗町", "　",R.drawable.building,  false));
-        TouristSpotListAdapter touristSpotListAdapter = new TouristSpotListAdapter(getActivity(), R.layout.tourist_spot_list_item, touristSpotDatas);
+        touristSpotDatas.add(new D_TouristSpot("京都市","50/101",R.drawable.building,  false));
+        touristSpotDatas.add(new D_TouristSpot("福知山市","50/101",R.drawable.building,  false));
+        touristSpotDatas.add(new D_TouristSpot("永谷園市","50/101",R.drawable.building,  false));
+        touristSpotDatas.add(new D_TouristSpot("尼崎市","50/101",R.drawable.building,  false));
+        touristSpotDatas.add(new D_TouristSpot("福寿円","50/101",R.drawable.building,  false));
+        touristSpotDatas.add(new D_TouristSpot("八坂","50/101",R.drawable.building,  false));
+        touristSpotDatas.add(new D_TouristSpot("五右衛門","50/101",R.drawable.building,  false));
+
+        LA_TouristSpot touristSpotListAdapter = new LA_TouristSpot(getActivity(), R.layout.tourist_spot_list_item, touristSpotDatas);
 
         // リストビューにデータを設定
         ListView prefectureListView = (ListView)v.findViewById(R.id.listView1);
@@ -68,10 +63,10 @@ public class TouristSpotForSpotFragment extends TouristSpotFragment {
                 ListView listView = (ListView)parent;
 
                 // タップした観光地IDをセットする
-                selectedSpotNo = ((TouristSpotData)listView.getItemAtPosition(position)).getSpotId();
+                selectedSpotNo = ((D_TouristSpot)listView.getItemAtPosition(position)).getSpotId();
 
                 // 動作確認ダイアログを表示
-                Toast.makeText(getActivity(), ((TouristSpotData)listView.getItemAtPosition(position)).getSpotName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), ((D_TouristSpot)listView.getItemAtPosition(position)).getSpotName(), Toast.LENGTH_SHORT).show();
 
                 onClick(listView);
 
@@ -91,7 +86,20 @@ public class TouristSpotForSpotFragment extends TouristSpotFragment {
             fragmentTransaction.commit();
 
         } else if (view.getId() == R.id.listView1) {
-            // TODO タッチした観光地の詳細へ
+            // TODO FragmentからFragmentへの値の渡し方はどのようにすればよいか
+            SettingsUtilty.outputOperationLog("観光地を選択しました。");
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            MDF_TouristSpot_ForSpot touristSpotForSpotFragment = new MDF_TouristSpot_ForSpot();
+
+            fragmentTransaction.add(R.id.main_fragment, touristSpotForSpotFragment, "touristSpotForSpotFragment");
+            fragmentTransaction.addToBackStack(null);
+
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+            fragmentTransaction.commit();
         }
     }
 

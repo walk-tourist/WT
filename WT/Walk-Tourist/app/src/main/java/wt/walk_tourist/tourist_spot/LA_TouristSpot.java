@@ -15,10 +15,10 @@ import wt.walk_tourist.R;
 /**
  * Created by User on 2015/05/09.
  */
-public class TouristSpotListAdapter extends BaseAdapter {
+public class LA_TouristSpot extends BaseAdapter {
     private final Context context;
     private final int layoutId;
-    private final List<TouristSpotData> list;
+    private final List<D_TouristSpot> list;
 
     @Override
     public int getCount() {
@@ -41,7 +41,7 @@ public class TouristSpotListAdapter extends BaseAdapter {
      * @param layoutId
      * @param list
      */
-    public TouristSpotListAdapter(Context context, int layoutId, List<TouristSpotData> list) {
+    public LA_TouristSpot(Context context, int layoutId, List<D_TouristSpot> list) {
         super();
         this.context =context;
         this.layoutId = layoutId;
@@ -58,7 +58,7 @@ public class TouristSpotListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
-        TouristSpotData item = (TouristSpotData)getItem(position);
+        D_TouristSpot item = (D_TouristSpot)getItem(position);
 
         if (null == convertView) {
             LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);

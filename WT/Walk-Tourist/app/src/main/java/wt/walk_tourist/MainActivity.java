@@ -6,9 +6,11 @@ import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.View;
 
-import wt.walk_tourist.game.GameContentsFragment;
-import wt.walk_tourist.point_management.PointManagementFragment;
-import wt.walk_tourist.tourist_spot.TouristSpotForPrefFragment;
+import wt.walk_tourist.base.MDF_Base;
+import wt.walk_tourist.game.MDF_Game_Contents;
+import wt.walk_tourist.help.MDF_Help;
+import wt.walk_tourist.point_management.MDF_PointManagement;
+import wt.walk_tourist.tourist_spot.MDF_TouristSpot;
 import wt.walk_tourist.tourist_spot.utility.SettingsUtilty;
 
 public class MainActivity extends Activity implements View.OnClickListener{
@@ -17,10 +19,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        this.findViewById(R.id.button_tourist_spot).setOnClickListener(this);
-        this.findViewById(R.id.button_start_game).setOnClickListener(this);
-        this.findViewById(R.id.button_point_management).setOnClickListener(this);
     }
 
 //    @Override
@@ -46,8 +44,37 @@ public class MainActivity extends Activity implements View.OnClickListener{
 //    }
 
     @Override
+    public void onStart()
+    {
+        super.onStart();
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        MDF_Base baseFragment = new MDF_Base();
+
+        fragmentTransaction.add(R.id.main_fragment, baseFragment, "baseFragment");
+        fragmentTransaction.addToBackStack(null);
+
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+        fragmentTransaction.commit();
+    }
+
+
+    public void move(View view)
+    {
+        this.onClick(view);
+    }
+
+    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.button_tourist_spot) {
+            SettingsUtilty.outputOperationLog("観光地Listを押下しました。");
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            // 1つ前のフラグメントを取り出す
+            fragmentManager.popBackStack();
+            fragmentTransaction.commit();
             /*
             Intent intent = new Intent();
             // ここで設定するパッケージ名（wt.walk_tourist）はAvdroidManifest.xmlで設定しているアプリケーションのパッケージ名であることに注意！！
@@ -55,12 +82,8 @@ public class MainActivity extends Activity implements View.OnClickListener{
             startActivity(intent);
             */
 
-            SettingsUtilty.outputOperationLog("観光地Listを押下しました。");
 
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            TouristSpotForPrefFragment touristSpotForPrefFragment = new TouristSpotForPrefFragment();
+            MDF_TouristSpot touristSpotForPrefFragment = new MDF_TouristSpot();
 
             fragmentTransaction.add(R.id.main_fragment, touristSpotForPrefFragment, "touristSpotForPrefFragment");
             fragmentTransaction.addToBackStack(null);
@@ -78,7 +101,11 @@ public class MainActivity extends Activity implements View.OnClickListener{
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            GameContentsFragment gameContentsFragment = new GameContentsFragment();
+            // 1つ前のフラグメントを取り出す
+            fragmentManager.popBackStack();
+            fragmentTransaction.commit();
+
+            MDF_Game_Contents gameContentsFragment = new MDF_Game_Contents();
 
             fragmentTransaction.add(R.id.main_fragment, gameContentsFragment, "gameContentsFragment");
             fragmentTransaction.addToBackStack(null);
@@ -92,9 +119,31 @@ public class MainActivity extends Activity implements View.OnClickListener{
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-            PointManagementFragment pointManagementFragment = new PointManagementFragment();
+            // 1つ前のフラグメントを取り出す
+            fragmentManager.popBackStack();
+            fragmentTransaction.commit();
+
+            MDF_PointManagement pointManagementFragment = new MDF_PointManagement();
 
             fragmentTransaction.add(R.id.main_fragment, pointManagementFragment, "pointManagementFragment");
+            fragmentTransaction.addToBackStack(null);
+
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+            fragmentTransaction.commit();
+        } else if (view.getId() == R.id.button_help) {
+            SettingsUtilty.outputOperationLog("Helpを押下しました。");
+
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            // 1つ前のフラグメントを取り出す
+            fragmentManager.popBackStack();
+            fragmentTransaction.commit();
+
+            MDF_Help helpFragment = new MDF_Help();
+
+            fragmentTransaction.add(R.id.main_fragment, helpFragment, "helpFragment");
             fragmentTransaction.addToBackStack(null);
 
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);

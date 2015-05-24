@@ -7,9 +7,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import wt.walk_tourist.R;
+import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
 
-public class TouristSpotFragment extends Fragment implements View.OnClickListener {
+public class MDF_TouristSpot extends WT_MainDisplayFragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
