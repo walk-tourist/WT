@@ -24,7 +24,7 @@ public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickList
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        View v = inflater.inflate(R.layout.game_contents_fragment, container, false);
+        View v = inflater.inflate(R.layout.base_fragment, container, false);
 
         setViewItems(v);
 

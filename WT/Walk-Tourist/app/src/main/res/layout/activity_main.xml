@@ -2,13 +2,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
-    android:background="@drawable/teamlab_logo">
-    <wt.walk_tourist.fragment_manager.WT_MainDisplayFragment
+    tools:context=".MainActivity">
+    <fragment
         android:id="@+id/main_fragment"
-        android:name="wt.walk_tourist.tourist_spot.TouristSpotFragment"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
-    </wt.walk_tourist.fragment_manager.WT_MainDisplayFragment>
+        android:layout_height="wrap_content"
+        android:name="wt.walk_tourist.base.MDF_Base"
+        tools:layout="@layout/base_fragment">
 
+    </fragment>
+
+<!--
+    <wt.walk_tourist.wt_fragment.WT_MainDisplayFragment
+        android:id="@+id/main_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:name="wt.walk_tourist.base.MDF_Base"
+        tools:layout="@layout/base_fragment">
+    </wt.walk_tourist.wt_fragment.WT_MainDisplayFragment>
+-->
 </RelativeLayout>
