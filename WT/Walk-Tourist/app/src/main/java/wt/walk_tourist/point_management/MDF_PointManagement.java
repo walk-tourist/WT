@@ -37,12 +37,7 @@ public class MDF_PointManagement extends WT_MainDisplayFragment implements View.
     public void onClick(View view) {
         if (view.getId() == R.id.point_management_back_button) {
             // TODO この画面を閉じる
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            // 1つ前のフラグメントを取り出す
-            fragmentManager.popBackStack();
-            fragmentTransaction.commit();
+            mListener.changeMDF(MDF_NAME.MDF_BASE);
 
         }
     }

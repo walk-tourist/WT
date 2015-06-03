@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 
 import wt.walk_tourist.base.MDF_Base;
@@ -12,8 +13,9 @@ import wt.walk_tourist.help.MDF_Help;
 import wt.walk_tourist.point_management.MDF_PointManagement;
 import wt.walk_tourist.tourist_spot.MDF_TouristSpot;
 import wt.walk_tourist.tourist_spot.utility.SettingsUtilty;
+import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
-public class MainActivity extends Activity implements View.OnClickListener{
+public class MainActivity extends Activity implements WT_MainDisplayFragment.MainFragmentListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,21 +62,16 @@ public class MainActivity extends Activity implements View.OnClickListener{
     }
 
 
-    public void move(View view)
+    public void changeMDF(WT_MainDisplayFragment.MDF_NAME name)
     {
-        this.onClick(view);
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.button_tourist_spot) {
+        if (name == WT_MainDisplayFragment.MDF_NAME.MDF_SPOT) {
             SettingsUtilty.outputOperationLog("観光地Listを押下しました。");
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             // 1つ前のフラグメントを取り出す
-            fragmentManager.popBackStack();
-            fragmentTransaction.commit();
+            //fragmentManager.popBackStack();
+            //fragmentTransaction.commit();
             /*
             Intent intent = new Intent();
             // ここで設定するパッケージ名（wt.walk_tourist）はAvdroidManifest.xmlで設定しているアプリケーションのパッケージ名であることに注意！！
@@ -85,8 +82,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
 
             MDF_TouristSpot touristSpotForPrefFragment = new MDF_TouristSpot();
 
-            fragmentTransaction.add(R.id.main_fragment, touristSpotForPrefFragment, "touristSpotForPrefFragment");
-            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.main_fragment, touristSpotForPrefFragment, "touristSpotForPrefFragment");
 
             fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
@@ -95,60 +91,83 @@ public class MainActivity extends Activity implements View.OnClickListener{
             // TODO ActionBarActivityをActivityに変更すると正常に動作する
 
             fragmentTransaction.commit();
-        } else if (view.getId() == R.id.button_start_game) {
+        }else if (name == WT_MainDisplayFragment.MDF_NAME.MDF_GAME) {
             SettingsUtilty.outputOperationLog("ゲームを押下しました。");
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             // 1つ前のフラグメントを取り出す
-            fragmentManager.popBackStack();
-            fragmentTransaction.commit();
+            //fragmentManager.popBackStack();
+            //fragmentTransaction.commit();
 
             MDF_Game_Contents gameContentsFragment = new MDF_Game_Contents();
 
-            fragmentTransaction.add(R.id.main_fragment, gameContentsFragment, "gameContentsFragment");
-            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.main_fragment, gameContentsFragment, "gameContentsFragment");
 
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
             fragmentTransaction.commit();
-        } else if (view.getId() == R.id.button_point_management) {
+        }else if (name == WT_MainDisplayFragment.MDF_NAME.MDF_POINT) {
             SettingsUtilty.outputOperationLog("ポイントを押下しました。");
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             // 1つ前のフラグメントを取り出す
-            fragmentManager.popBackStack();
-            fragmentTransaction.commit();
+            //fragmentManager.popBackStack();
+            //fragmentTransaction.commit();
 
             MDF_PointManagement pointManagementFragment = new MDF_PointManagement();
 
-            fragmentTransaction.add(R.id.main_fragment, pointManagementFragment, "pointManagementFragment");
-            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.main_fragment, pointManagementFragment, "pointManagementFragment");
 
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
             fragmentTransaction.commit();
-        } else if (view.getId() == R.id.button_help) {
+        }else if (name == WT_MainDisplayFragment.MDF_NAME.MDF_HELP) {
             SettingsUtilty.outputOperationLog("Helpを押下しました。");
 
             FragmentManager fragmentManager = getFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
             // 1つ前のフラグメントを取り出す
-            fragmentManager.popBackStack();
-            fragmentTransaction.commit();
+            //fragmentManager.popBackStack();
+            //fragmentTransaction.commit();
 
             MDF_Help helpFragment = new MDF_Help();
 
-            fragmentTransaction.add(R.id.main_fragment, helpFragment, "helpFragment");
-            fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.replace(R.id.main_fragment, helpFragment, "helpFragment");
 
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
 
             fragmentTransaction.commit();
+        }else if (name == WT_MainDisplayFragment.MDF_NAME.MDF_BASE) {
+            FragmentManager fragmentManager = getFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+            // 1つ前のフラグメントを取り出す
+            //fragmentManager.popBackStack();
+            //fragmentTransaction.commit();
+
+            MDF_Base baseFragment = new MDF_Base();
+
+            fragmentTransaction.replace(R.id.main_fragment, baseFragment, "baseFragment");
+
+            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+
+            fragmentTransaction.commit();
+
+        }
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if(keyCode != KeyEvent.KEYCODE_BACK){
+            return super.onKeyDown(keyCode, event);
+        }else{
+            // TODO 今表示中の画面がBaseの場合はアプリケーション終了確認ダイアログを表示する
+            changeMDF(WT_MainDisplayFragment.MDF_NAME.MDF_BASE);
+            return false;
         }
     }
 }

@@ -29,6 +29,8 @@ public class MDF_Game_Contents extends WT_MainDisplayFragment implements View.On
         View v = inflater.inflate(R.layout.game_contents_fragment, container, false);
 
 
+        setViewItems(v);
+
         return v;
     }
 
@@ -81,12 +83,7 @@ public class MDF_Game_Contents extends WT_MainDisplayFragment implements View.On
     public void onClick(View view) {
         if (view.getId() == R.id.game_contents_back_button) {
             // TODO この画面を閉じる
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            // 1つ前のフラグメントを取り出す
-            fragmentManager.popBackStack();
-            fragmentTransaction.commit();
+            mListener.changeMDF(MDF_NAME.MDF_BASE);
 
         } else if (view.getId() == R.id.listView1) {
             // TODO FragmentからFragmentへの値の渡し方はどのようにすればよいか

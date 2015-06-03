@@ -42,7 +42,21 @@ public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        MainActivity mainActivity = (MainActivity)getActivity();
-        mainActivity.move(view);
+
+        switch(view.getId())
+        {
+            case R.id.button_tourist_spot:
+                mListener.changeMDF(MDF_NAME.MDF_SPOT);
+                break;
+            case R.id.button_start_game:
+                mListener.changeMDF(MDF_NAME.MDF_GAME);
+                break;
+            case R.id.button_point_management:
+                mListener.changeMDF(MDF_NAME.MDF_POINT);
+                break;
+            case R.id.button_help:
+                mListener.changeMDF(MDF_NAME.MDF_HELP);
+                break;
+        }
     }
 }
