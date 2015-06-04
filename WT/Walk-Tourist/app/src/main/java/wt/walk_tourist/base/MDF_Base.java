@@ -1,24 +1,13 @@
 package wt.walk_tourist.base;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import wt.walk_tourist.MainActivity;
 import wt.walk_tourist.R;
-import wt.walk_tourist.game.MDF_Game_Contents;
-import wt.walk_tourist.help.MDF_Help;
-import wt.walk_tourist.point_management.MDF_PointManagement;
-import wt.walk_tourist.tourist_spot.MDF_TouristSpot;
-import wt.walk_tourist.tourist_spot.utility.SettingsUtilty;
 import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
-/**
- * Created by Akira on 2015/05/25.
- */
 public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickListener {
 
     @Override
@@ -37,6 +26,7 @@ public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickList
         v.findViewById(R.id.button_start_game).setOnClickListener(this);
         v.findViewById(R.id.button_point_management).setOnClickListener(this);
         v.findViewById(R.id.button_help).setOnClickListener(this);
+        v.findViewById(R.id.button_display_map).setOnClickListener(this);
 
     }
 
@@ -56,6 +46,9 @@ public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickList
                 break;
             case R.id.button_help:
                 mListener.changeMDF(MDF_NAME.MDF_HELP);
+                break;
+            case R.id.button_display_map:
+                mListener.changeMDF(MDF_NAME.MDF_MAP);
                 break;
         }
     }
