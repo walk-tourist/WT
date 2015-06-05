@@ -41,4 +41,10 @@ public class MDF_PointManagement extends WT_MainDisplayFragment implements View.
 
         }
     }
+
+    @Override
+    public void removeChildFragment()
+    {
+
+    }
 }

@@ -2,80 +2,94 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/game_contents_fragment_layout"
-    android:background="@drawable/top_background">
+    android:id="@+id/game_contents_fragment_layout">
 
-    <LinearLayout
-        android:layout_below="@+id/main_fragment"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="20dp" >
-            <ImageView
-                android:id="@+id/location_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/location"
-                />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toRightOf="@+id/location_icon"
-                android:textSize="20dp"
-                android:text="現在地\n 大阪府東淀川区西中島\n 123-45-6"
-                />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/button_point_management"
-                android:background="@drawable/point_icon"
-                />
-            <Button
-                android:id="@+id/button_point_management"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:padding="10dp"
-                android:text="1000p"
-                android:textSize="20dp"
-                android:layout_alignParentRight="true" />
-        </RelativeLayout>
 
-        <LinearLayout
-            android:gravity="center"
+        <!-- PartsDisplayFragment の 入れ物 -->
+        <FrameLayout
+            android:layout_below="@+id/main_fragment"
+            android:id="@+id/base_texture_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
-            <Button
-                android:id="@+id/button_tourist_spot"
-                android:layout_width="wrap_content"
+            />
+
+        <LinearLayout
+            android:layout_below="@+id/main_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:text="@string/button_tourist_spot"/>
-            <Button
-                android:id="@+id/button_display_map"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:text="@string/button_display_map"/>
-            <Button
-                android:id="@+id/button_start_game"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:text="@string/button_start_game"/>
-            <Button
-                android:id="@+id/button_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:text="@string/button_help"/>
+                android:padding="20dp" >
+                <ImageView
+                    android:id="@+id/location_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/location"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@+id/location_icon"
+                    android:textSize="20dp"
+                    android:text="現在地\n 大阪府東淀川区西中島\n 123-45-6"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/button_point_management"
+                    android:background="@drawable/point_icon"
+                    />
+                <Button
+                    android:id="@+id/button_point_management"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:padding="10dp"
+                    android:text="1000p"
+                    android:textSize="20dp"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/button_tourist_spot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="@string/button_tourist_spot"/>
+                <Button
+                    android:id="@+id/button_display_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="@string/button_display_map"/>
+                <Button
+                    android:id="@+id/button_start_game"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="@string/button_start_game"/>
+                <Button
+                    android:id="@+id/button_help"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="@string/button_help"/>
+            </LinearLayout>
+
         </LinearLayout>
 
-    </LinearLayout>
+    </FrameLayout>
 
 </RelativeLayout>

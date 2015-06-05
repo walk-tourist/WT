@@ -65,10 +65,10 @@ public class MDF_Game_Contents extends WT_MainDisplayFragment implements View.On
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 // クリックしたリストの情報を格納 リクエスト送信用
-                ListView listView = (ListView)parent;
+                ListView listView = (ListView) parent;
 
                 // タップした観光地IDをセットする
-                selectedSpotNo = ((D_Game_Contents)listView.getItemAtPosition(position)).getContentsId();
+                selectedSpotNo = ((D_Game_Contents) listView.getItemAtPosition(position)).getContentsId();
 
                 // 動作確認ダイアログを表示
                 Toast.makeText(getActivity(), ((D_Game_Contents) listView.getItemAtPosition(position)).getContentsName(), Toast.LENGTH_SHORT).show();
@@ -89,5 +89,10 @@ public class MDF_Game_Contents extends WT_MainDisplayFragment implements View.On
             // TODO FragmentからFragmentへの値の渡し方はどのようにすればよいか
             // TODO コンテンツ画面へ遷移するようにする
         }
+    }
+    @Override
+    public void removeChildFragment()
+    {
+
     }
 }

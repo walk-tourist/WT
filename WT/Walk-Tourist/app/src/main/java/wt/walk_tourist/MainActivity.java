@@ -61,46 +61,56 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
         m_MDF_Name = name;
 
         FragmentManager fragmentManager = getFragmentManager();
+
+        // PDF_Remove処理
+        WT_MainDisplayFragment oldMainDisplayFragment =  (WT_MainDisplayFragment)fragmentManager.findFragmentByTag("mainFragment");
+        if( null != oldMainDisplayFragment)
+        {
+            oldMainDisplayFragment.removeChildFragment();
+        }
+
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
         int transactionType = 0;
+
+        WT_MainDisplayFragment MDF_Fragment = null;
 
         switch(name)
         {
             case MDF_BASE:
-                MDF_Base baseFragment = new MDF_Base();
-                fragmentTransaction.replace(R.id.main_fragment, baseFragment, "baseFragment");
+                MDF_Fragment = new MDF_Base();
                 transactionType = FragmentTransaction.TRANSIT_FRAGMENT_CLOSE;
                 break;
             case MDF_SPOT:
-                MDF_TouristSpot touristSpotForPrefFragment = new MDF_TouristSpot();
-                fragmentTransaction.replace(R.id.main_fragment, touristSpotForPrefFragment, "touristSpotForPrefFragment");
+                MDF_Fragment = new MDF_TouristSpot();
                 transactionType = FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
                 break;
             case MDF_GAME:
-                MDF_Game_Contents gameContentsFragment = new MDF_Game_Contents();
-                fragmentTransaction.replace(R.id.main_fragment, gameContentsFragment, "gameContentsFragment");
+                MDF_Fragment = new MDF_Game_Contents();
                 transactionType = FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
                 break;
             case MDF_MAP:
                 // TODO MAP用の処理が必要 (今はほぼHELP処理のコピペ)
-                MDF_Help mapFragment = new MDF_Help();
-                fragmentTransaction.replace(R.id.main_fragment, mapFragment, "helpFragment");
+                MDF_Fragment = new MDF_Help();
                 transactionType = FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
                 break;
             case MDF_POINT:
-                MDF_PointManagement pointManagementFragment = new MDF_PointManagement();
-                fragmentTransaction.replace(R.id.main_fragment, pointManagementFragment, "pointManagementFragment");
+                MDF_Fragment = new MDF_PointManagement();
                 transactionType = FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
                 break;
             case MDF_HELP:
-                MDF_Help helpFragment = new MDF_Help();
-                fragmentTransaction.replace(R.id.main_fragment, helpFragment, "helpFragment");
+                MDF_Fragment = new MDF_Help();
                 transactionType = FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
+                break;
+            default:
                 break;
         }
 
-        fragmentTransaction.setTransition(transactionType);
-        fragmentTransaction.commit();
+        if (  null != MDF_Fragment ) {
+            fragmentTransaction.replace(R.id.main_fragment, MDF_Fragment, "mainFragment");
+            fragmentTransaction.setTransition(transactionType);
+            fragmentTransaction.commit();
+        }
     }
 
     @Override

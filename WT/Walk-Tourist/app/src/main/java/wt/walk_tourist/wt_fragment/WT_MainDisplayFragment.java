@@ -12,7 +12,9 @@ import wt.walk_tourist.R;
  * Created by Akira on 2015/05/25.
  * アプリのMainActivityで使用するFragmentを管理するクラス
  */
-public class WT_MainDisplayFragment extends WT_Fragment {
+public abstract class WT_MainDisplayFragment extends WT_Fragment {
+
+    public WT_MainDisplayFragment() {}
 
     public enum MDF_NAME{
         MDF_BASE,
@@ -20,7 +22,8 @@ public class WT_MainDisplayFragment extends WT_Fragment {
         MDF_SPOT,
         MDF_MAP,
         MDF_HELP,
-        MDF_POINT
+        MDF_POINT,
+        MDF_DFF
     }
 
     public interface MainFragmentListener
@@ -40,6 +43,11 @@ public class WT_MainDisplayFragment extends WT_Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        return inflater.inflate(R.layout.dummy_layout,null);
+        super.onCreateView(inflater, container, savedInstanceState);
+        View v = inflater.inflate(R.layout.dummy_layout, container, false);
+        return v;
     }
+
+    public abstract void removeChildFragment();
+
 }
