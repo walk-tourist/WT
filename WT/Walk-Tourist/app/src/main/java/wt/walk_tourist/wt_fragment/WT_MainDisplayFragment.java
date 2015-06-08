@@ -40,14 +40,6 @@ public abstract class WT_MainDisplayFragment extends WT_Fragment {
         mListener = (MainFragmentListener)activity;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
-    {
-        super.onCreateView(inflater, container, savedInstanceState);
-        View v = inflater.inflate(R.layout.dummy_layout, container, false);
-        return v;
-    }
-
     public abstract void removeChildFragment();
 
 }

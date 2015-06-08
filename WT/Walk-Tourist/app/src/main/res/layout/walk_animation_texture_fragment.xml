@@ -3,4 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <wt.walk_tourist.parts_fragment.PDF_WalkAnimation_TextureView
+        android:id="@+id/walk_animation_texture"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
 </LinearLayout>
