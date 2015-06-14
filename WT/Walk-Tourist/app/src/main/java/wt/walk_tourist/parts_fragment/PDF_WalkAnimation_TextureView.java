@@ -9,7 +9,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.TextureView;
 
+import java.io.InputStream;
+
 import wt.walk_tourist.R;
+import wt.walk_tourist.animation.A_Character;
 
 /**
  * Created by taguchi on 2015/06/08.
@@ -17,12 +20,16 @@ import wt.walk_tourist.R;
  */
 public class PDF_WalkAnimation_TextureView extends TextureView implements TextureView.SurfaceTextureListener, Runnable{
 
+    private A_Character mCharacter;
+
     private Thread mLoop;
     private boolean mRunning = false;
     private Bitmap mHaikei;
     private int mDispWidth;
     private int mImageWidth;
     private int mX;
+
+    private int mDirection;
 
     public PDF_WalkAnimation_TextureView(Context context)
     {
@@ -50,6 +57,11 @@ public class PDF_WalkAnimation_TextureView extends TextureView implements Textur
 
         mDispWidth = getWidth();
 
+//        InputStream input_stream = getResources().openRawResource(R.drawable.c01_32);
+
+        mDirection = 2;
+        mCharacter = new A_Character(getResources().openRawResource(R.raw.c01_32));
+
         mX = 0;
         //スレッドの開始
         mLoop = new Thread(this);
@@ -67,8 +79,16 @@ public class PDF_WalkAnimation_TextureView extends TextureView implements Textur
     public void onSurfaceTextureUpdated(SurfaceTexture surface) {
 
         // TODO 描画内容更新処理
-        mX = mX -1;
+        switch(mDirection)
+        {
+            case 1:
+                mX = mX +1;
+                break;
 
+            case 2:
+                mX = mX -1;
+                break;
+        }
     }
 
     //サーフェイステクスチャ破棄時に呼ばれる
@@ -111,25 +131,45 @@ public class PDF_WalkAnimation_TextureView extends TextureView implements Textur
             if (null != canvas) {
                 canvas.drawColor(0xFF000000);
 
-                // 画像を流し切った場合
+                // 画像を左に流し切った場合
                 if ( 0 == ( mImageWidth + mX )  )
                 {
                     // 初期位置に戻す
                     mX = 0;
                 }
-
+                // 画像を右に流しきった場合
+                else if ( mImageWidth == mX )
+                {
+                    // 初期位置に戻す
+                    mX = mImageWidth - mDispWidth;
+                }
                 // 1枚目の画像描画
                 canvas.drawBitmap(mHaikei, mX, 0, null);
 
-                // 1枚目の画像が見切れている場合
+                // 1枚目の画の右が見切れている場合
                 if ( ( mImageWidth + mX ) < mDispWidth )
                 {
                     // 2枚目の画像描画
                     canvas.drawBitmap(mHaikei, mImageWidth + mX, 0, null);
                 }
+                // 1枚目の画の左が見切れている場合
+                else if ( mX > 0 )
+                {
+                    // 2枚目の画像描画
+                    canvas.drawBitmap(mHaikei, - mImageWidth + mX, 0, null);
+                }
+                // キャラクター描画
+                canvas.drawBitmap(mCharacter.getAnimationBitmap(),200,200,null);
+
                 //LockしたCanvasを解放、ほかの描画処理スレッドがあればそちらに。
                 unlockCanvasAndPost(canvas);
             }
         }
+    }
+
+    void changeDirection(int direction)
+    {
+        mDirection = direction;
+        mCharacter.changeDirection(direction);
     }
 }

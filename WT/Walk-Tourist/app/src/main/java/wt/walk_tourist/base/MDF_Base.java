@@ -47,10 +47,19 @@ public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickList
         v.findViewById(R.id.button_help).setOnClickListener(this);
         v.findViewById(R.id.button_display_map).setOnClickListener(this);
 
+        v.findViewById(R.id.button_left).setOnClickListener(this);
+        v.findViewById(R.id.button_right).setOnClickListener(this);
+        v.findViewById(R.id.button_top).setOnClickListener(this);
+        v.findViewById(R.id.button_bottom).setOnClickListener(this);
+
     }
 
     @Override
     public void onClick(View view) {
+
+        FragmentManager fragmentManager = getFragmentManager();
+        PDF_WalkAnimation_Texture fragment = (PDF_WalkAnimation_Texture)fragmentManager.findFragmentByTag("base_texture_fragment");
+
 
         switch (view.getId()) {
             case R.id.button_tourist_spot:
@@ -67,6 +76,19 @@ public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickList
                 break;
             case R.id.button_display_map:
                 mListener.changeMDF(MDF_NAME.MDF_MAP);
+                break;
+
+            case R.id.button_right:
+                fragment.changeDirection(2);
+                break;
+            case R.id.button_left:
+                fragment.changeDirection(1);
+                break;
+            case R.id.button_top:
+                fragment.changeDirection(3);
+                break;
+            case R.id.button_bottom:
+                fragment.changeDirection(0);
                 break;
         }
     }

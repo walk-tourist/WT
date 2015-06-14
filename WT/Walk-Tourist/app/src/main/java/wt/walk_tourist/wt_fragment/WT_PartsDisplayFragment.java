@@ -9,4 +9,6 @@ public abstract class WT_PartsDisplayFragment extends WT_Fragment {
     public WT_PartsDisplayFragment() {}
 
     public abstract void releaseParts();
+
+    public int getsize(){return 0;};
 }

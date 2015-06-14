@@ -12,6 +12,13 @@
     <string name="button_display_map">Map表示</string>
     <string name="button_start_game">ゲーム</string>
     <string name="button_help">Help</string>
+
+    <string name="button_right">右</string>
+    <string name="button_left">左</string>
+    <string name="button_top">上</string>
+    <string name="button_bottom">下</string>
+
+
     <!-- // top -->
 
     <!-- tourist_spot -->

@@ -28,6 +28,19 @@ public class PDF_WalkAnimation_Texture extends WT_PartsDisplayFragment {
             pdf_walkAnimation_textureView = (PDF_WalkAnimation_TextureView) v.findViewById(R.id.walk_animation_texture);
             pdf_walkAnimation_textureView.stopThread();
         }
+
+        getsize();
+    }
+
+    public void changeDirection(int direction)
+    {
+        PDF_WalkAnimation_TextureView pdf_walkAnimation_textureView;
+
+        View v = getView();
+        if( null != v ) {
+            pdf_walkAnimation_textureView = (PDF_WalkAnimation_TextureView) v.findViewById(R.id.walk_animation_texture);
+            pdf_walkAnimation_textureView.changeDirection(direction);
+        }
     }
 
 }
