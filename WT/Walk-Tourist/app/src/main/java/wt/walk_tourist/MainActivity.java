@@ -3,7 +3,13 @@ package wt.walk_tourist;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -12,6 +18,7 @@ import wt.walk_tourist.base.MDF_Base;
 import wt.walk_tourist.game.MDF_Game_Contents;
 import wt.walk_tourist.help.MDF_Help;
 import wt.walk_tourist.point_management.MDF_PointManagement;
+import wt.walk_tourist.sound.BGM_Player_Service;
 import wt.walk_tourist.tourist_spot.MDF_TouristSpot;
 import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
@@ -26,6 +33,22 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
     }
 
     protected WT_MainDisplayFragment.MDF_NAME m_MDF_Name;
+    protected int mReservationBGMResId = 0;
+    protected Intent serviceIntent;
+    BGM_Player_Service myService;
+    ServiceConnection serviceConnection = new ServiceConnection(){
+        @Override public void onServiceConnected(ComponentName name, IBinder service) {
+            myService = ((BGM_Player_Service.MyBinder)service).getService();
+            if( 0 != mReservationBGMResId)
+            {
+                myService.startBGM(mReservationBGMResId);
+                mReservationBGMResId = 0;
+            }
+        }
+        @Override public void onServiceDisconnected(ComponentName name) {
+            myService = null;
+        }
+    };
 
     @Override
     protected void onSaveInstanceState(@NonNull Bundle outState )
@@ -47,6 +70,9 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
         {
             m_MDF_Name = WT_MainDisplayFragment.MDF_NAME.MDF_BASE;
         }
+
+        serviceIntent = new Intent( getBaseContext(), BGM_Player_Service.class);
+        bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE);
     }
 
     @Override
@@ -56,18 +82,34 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
 
         changeMDF(m_MDF_Name);
     }
-    public void changeMDF(WT_MainDisplayFragment.MDF_NAME name)
+
+    @Override
+    public void onPause()
     {
-        m_MDF_Name = name;
+        super.onPause();
+        if ( null != myService )
+        {
+            myService.stopBGM();
+        }
+    }
 
-        FragmentManager fragmentManager = getFragmentManager();
-
+    private void removePDF(FragmentManager fragmentManager)
+    {
         // PDF_Remove処理
         WT_MainDisplayFragment oldMainDisplayFragment =  (WT_MainDisplayFragment)fragmentManager.findFragmentByTag("mainFragment");
         if( null != oldMainDisplayFragment)
         {
             oldMainDisplayFragment.removeChildFragment();
         }
+    }
+
+    public void changeMDF(WT_MainDisplayFragment.MDF_NAME name)
+    {
+        m_MDF_Name = name;
+
+        FragmentManager fragmentManager = getFragmentManager();
+
+        removePDF(fragmentManager);
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
@@ -75,7 +117,7 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
 
         WT_MainDisplayFragment MDF_Fragment = null;
 
-        switch(name)
+        switch(m_MDF_Name)
         {
             case MDF_BASE:
                 MDF_Fragment = new MDF_Base();
@@ -106,12 +148,47 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
                 break;
         }
 
-        if (  null != MDF_Fragment ) {
+        if (  null != MDF_Fragment ){//&& 0!= bgmResId ) {
             fragmentTransaction.replace(R.id.main_fragment, MDF_Fragment, "mainFragment");
             fragmentTransaction.setTransition(transactionType);
             fragmentTransaction.commit();
+
+            setOrientation(MDF_Fragment.getScreenOrientation());
+
+            if ( null != myService )
+            {
+                myService.startBGM(MDF_Fragment.getBGMResId());
+            }
+            else
+            {
+                mReservationBGMResId = MDF_Fragment.getBGMResId();
+            }
         }
     }
+
+    private void setOrientation(int screenOrientation)
+    {
+        switch(screenOrientation)
+        {
+            case ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+                break;
+            case ActivityInfo.SCREEN_ORIENTATION_PORTRAIT:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+                break;
+            case ActivityInfo.SCREEN_ORIENTATION_SENSOR:
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
+                break;
+        }
+    }
+
+    @Override
+    public void onDestroy()
+    {
+        super.onDestroy();
+        unbindService(serviceConnection);
+    }
+
 
     @Override
     public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
@@ -125,7 +202,8 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
             else
             {
                 // TODO アプリケーション終了確認ダイアログを表示する
-                Log.d("hoge","huge");
+                Log.d("hoge", "huge");
+                stopService(new Intent(getBaseContext(), BGM_Player_Service.class));
             }
             return false;
         }

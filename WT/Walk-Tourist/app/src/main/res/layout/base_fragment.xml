@@ -60,7 +60,7 @@
             <LinearLayout
                 android:gravity="center"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <Button
                     android:id="@+id/button_tourist_spot"
@@ -87,6 +87,40 @@
                     android:layout_gravity="bottom"
                     android:text="@string/button_help"/>
             </LinearLayout>
+
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/button_right"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="@string/button_right"/>
+                <Button
+                    android:id="@+id/button_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="@string/button_left"/>
+                <Button
+                    android:id="@+id/button_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="@string/button_top"/>
+                <Button
+                    android:id="@+id/button_bottom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:text="@string/button_bottom"/>
+            </LinearLayout>
+
+
 
         </LinearLayout>
 
