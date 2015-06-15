@@ -81,12 +81,20 @@ public class PDF_WalkAnimation_TextureView extends TextureView implements Textur
         // TODO 描画内容更新処理
         switch(mDirection)
         {
+            case 0:
+                mCharacter.updateYPos(1);
+                break;
+
             case 1:
                 mX = mX +1;
                 break;
 
             case 2:
                 mX = mX -1;
+                break;
+
+            case 3:
+                mCharacter.updateYPos(-1);
                 break;
         }
     }
@@ -159,7 +167,7 @@ public class PDF_WalkAnimation_TextureView extends TextureView implements Textur
                     canvas.drawBitmap(mHaikei, - mImageWidth + mX, 0, null);
                 }
                 // キャラクター描画
-                canvas.drawBitmap(mCharacter.getAnimationBitmap(),200,200,null);
+                canvas.drawBitmap(mCharacter.getAnimationBitmap(),mCharacter.getXPos(),mCharacter.getYPos(),null);
 
                 //LockしたCanvasを解放、ほかの描画処理スレッドがあればそちらに。
                 unlockCanvasAndPost(canvas);

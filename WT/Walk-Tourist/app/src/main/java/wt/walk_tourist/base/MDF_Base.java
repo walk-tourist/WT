@@ -14,6 +14,8 @@ import wt.walk_tourist.wt_fragment.WT_PartsDisplayFragment;
 
 public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickListener {
 
+    private int mSoundId;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -27,6 +29,8 @@ public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickList
     @Override
     public void onStart() {
         super.onStart();
+
+        mSoundId = mSoundPool.load(getActivity().getBaseContext(),R.raw.system49,1);
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -63,31 +67,40 @@ public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickList
 
         switch (view.getId()) {
             case R.id.button_tourist_spot:
+                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
                 mListener.changeMDF(MDF_NAME.MDF_SPOT);
                 break;
             case R.id.button_start_game:
+                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
                 mListener.changeMDF(MDF_NAME.MDF_GAME);
                 break;
             case R.id.button_point_management:
+                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
                 mListener.changeMDF(MDF_NAME.MDF_POINT);
                 break;
             case R.id.button_help:
+                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
                 mListener.changeMDF(MDF_NAME.MDF_HELP);
                 break;
             case R.id.button_display_map:
+                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
                 mListener.changeMDF(MDF_NAME.MDF_MAP);
                 break;
 
             case R.id.button_right:
+                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
                 fragment.changeDirection(2);
                 break;
             case R.id.button_left:
+                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
                 fragment.changeDirection(1);
                 break;
             case R.id.button_top:
+                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
                 fragment.changeDirection(3);
                 break;
             case R.id.button_bottom:
+                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
                 fragment.changeDirection(0);
                 break;
         }

@@ -25,6 +25,9 @@ public class A_Character {
     private int mAnimationCount;
     private int mDirection;
 
+    private int mXPos;
+    private int mYPos;
+
     // 左歩き
     Bitmap lw_1;
     Bitmap lw_2;
@@ -53,6 +56,9 @@ public class A_Character {
 
         mAnimationCount = 0;
         mDirection = 2; // 0:下 1:左  2:右  3:上 TODO 後々は定義化
+
+        mXPos = 500;
+        mYPos = 1000;
 
         createImage();
     }
@@ -210,6 +216,26 @@ public class A_Character {
         }
 
         return rBitmap;
+    }
+
+    public void updateXPos(int x)
+    {
+        mXPos = mXPos + x;
+    }
+
+    public void updateYPos(int y)
+    {
+        mYPos = mYPos + y;
+    }
+
+    public int getXPos()
+    {
+        return mXPos;
+    }
+
+    public int getYPos()
+    {
+        return mYPos;
     }
 
 }
