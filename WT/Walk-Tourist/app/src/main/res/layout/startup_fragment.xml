@@ -3,9 +3,10 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <wt.walk_tourist.parts_fragment.WalkAnimation_TextureView
-        android:id="@+id/walk_animation_texture"
+    <ImageView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
+        android:layout_height="match_parent"
+        android:id="@+id/imageView"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/tourist_spot_background" />
 </LinearLayout>

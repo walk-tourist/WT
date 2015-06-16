@@ -48,9 +48,4 @@ public class MDF_TouristSpot extends WT_MainDisplayFragment implements View.OnCl
         // TODO 継承先で実装
     }
 
-    @Override
-    public void removeChildFragment()
-    {
-
-    }
 }

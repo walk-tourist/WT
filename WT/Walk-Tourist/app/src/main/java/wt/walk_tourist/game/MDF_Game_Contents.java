@@ -1,6 +1,5 @@
 package wt.walk_tourist.game;
 
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -83,16 +81,11 @@ public class MDF_Game_Contents extends WT_MainDisplayFragment implements View.On
     public void onClick(View view) {
         if (view.getId() == R.id.game_contents_back_button) {
             // TODO この画面を閉じる
-            mListener.changeMDF(MDF_NAME.MDF_BASE);
+            mListener.changeMDF(MDF_NAME.MDF_BASE,FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
 
         } else if (view.getId() == R.id.listView1) {
             // TODO FragmentからFragmentへの値の渡し方はどのようにすればよいか
             // TODO コンテンツ画面へ遷移するようにする
         }
-    }
-    @Override
-    public void removeChildFragment()
-    {
-
     }
 }

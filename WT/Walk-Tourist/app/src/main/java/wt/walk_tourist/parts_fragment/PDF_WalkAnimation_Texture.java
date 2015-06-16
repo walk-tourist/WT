@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import wt.walk_tourist.R;
+import wt.walk_tourist.define.Define;
 import wt.walk_tourist.wt_fragment.WT_PartsDisplayFragment;
 
 /**
@@ -14,7 +15,7 @@ import wt.walk_tourist.wt_fragment.WT_PartsDisplayFragment;
  */
 public class PDF_WalkAnimation_Texture extends WT_PartsDisplayFragment {
 
-    PDF_WalkAnimation_TextureView m_pdf_WalkAnimation_TextureView;
+    WalkAnimation_TextureView m_WalkAnimation_TextureView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -26,28 +27,27 @@ public class PDF_WalkAnimation_Texture extends WT_PartsDisplayFragment {
     {
         View v = getView();
         if (null != v) {
-            m_pdf_WalkAnimation_TextureView = (PDF_WalkAnimation_TextureView) v.findViewById(R.id.walk_animation_texture);
+            m_WalkAnimation_TextureView = (WalkAnimation_TextureView) v.findViewById(R.id.walk_animation_texture);
         }
     }
-
 
     public void releaseParts()
     {
-        if( null == m_pdf_WalkAnimation_TextureView ) {
+        if( null == m_WalkAnimation_TextureView) {
             getWalkAnimation_TextureView();
         }
-        if( null != m_pdf_WalkAnimation_TextureView ) {
-            m_pdf_WalkAnimation_TextureView.stopThread();
+        if( null != m_WalkAnimation_TextureView) {
+            m_WalkAnimation_TextureView.stopThread();
         }
     }
 
-    public void changeDirection(int direction)
+    public void changeDirection(Define.DIRECTION_DEF direction)
     {
-        if( null == m_pdf_WalkAnimation_TextureView ) {
+        if( null == m_WalkAnimation_TextureView) {
             getWalkAnimation_TextureView();
         }
-        if( null != m_pdf_WalkAnimation_TextureView ) {
-            m_pdf_WalkAnimation_TextureView.changeDirection(direction);
+        if( null != m_WalkAnimation_TextureView) {
+            m_WalkAnimation_TextureView.changeDirection(direction);
         }
     }
 

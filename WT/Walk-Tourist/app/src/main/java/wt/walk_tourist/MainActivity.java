@@ -13,12 +13,14 @@ import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.widget.RelativeLayout;
 
 import wt.walk_tourist.base.MDF_Base;
 import wt.walk_tourist.game.MDF_Game_Contents;
 import wt.walk_tourist.help.MDF_Help;
 import wt.walk_tourist.point_management.MDF_PointManagement;
 import wt.walk_tourist.sound.BGM_Player_Service;
+import wt.walk_tourist.startup.MDF_StartUp;
 import wt.walk_tourist.tourist_spot.MDF_TouristSpot;
 import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
@@ -31,6 +33,9 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
             return name();
         }
     }
+
+    public int m_LayoutWidth;
+    public int m_LayoutHeight;
 
     protected WT_MainDisplayFragment.MDF_NAME m_MDF_Name;
     protected int mReservationBGMResId = 0;
@@ -68,7 +73,7 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
         }
         else
         {
-            m_MDF_Name = WT_MainDisplayFragment.MDF_NAME.MDF_BASE;
+            m_MDF_Name = WT_MainDisplayFragment.MDF_NAME.MDF_START;
         }
 
         serviceIntent = new Intent( getBaseContext(), BGM_Player_Service.class);
@@ -93,6 +98,17 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
         }
     }
 
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus)
+    {
+        super.onWindowFocusChanged(hasFocus);
+
+        RelativeLayout rl = (RelativeLayout)findViewById(R.id.main_activity);
+        m_LayoutWidth = rl.getWidth();
+        m_LayoutHeight = rl.getHeight();
+
+    }
+
     private void removePDF(FragmentManager fragmentManager)
     {
         // PDF_Remove処理
@@ -105,6 +121,11 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
 
     public void changeMDF(WT_MainDisplayFragment.MDF_NAME name)
     {
+        changeMDF(name, FragmentTransaction.TRANSIT_NONE);
+    }
+
+    public void changeMDF(WT_MainDisplayFragment.MDF_NAME name, int transaction)
+    {
         m_MDF_Name = name;
 
         FragmentManager fragmentManager = getFragmentManager();
@@ -113,36 +134,31 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        int transactionType = 0;
-
         WT_MainDisplayFragment MDF_Fragment = null;
 
         switch(m_MDF_Name)
         {
+            case MDF_START:
+                MDF_Fragment = new MDF_StartUp();
+                break;
             case MDF_BASE:
                 MDF_Fragment = new MDF_Base();
-                transactionType = FragmentTransaction.TRANSIT_FRAGMENT_CLOSE;
                 break;
             case MDF_SPOT:
                 MDF_Fragment = new MDF_TouristSpot();
-                transactionType = FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
                 break;
             case MDF_GAME:
                 MDF_Fragment = new MDF_Game_Contents();
-                transactionType = FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
                 break;
             case MDF_MAP:
                 // TODO MAP用の処理が必要 (今はほぼHELP処理のコピペ)
                 MDF_Fragment = new MDF_Help();
-                transactionType = FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
                 break;
             case MDF_POINT:
                 MDF_Fragment = new MDF_PointManagement();
-                transactionType = FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
                 break;
             case MDF_HELP:
                 MDF_Fragment = new MDF_Help();
-                transactionType = FragmentTransaction.TRANSIT_FRAGMENT_OPEN;
                 break;
             default:
                 break;
@@ -150,7 +166,8 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
 
         if (  null != MDF_Fragment ){//&& 0!= bgmResId ) {
             fragmentTransaction.replace(R.id.main_fragment, MDF_Fragment, "mainFragment");
-            fragmentTransaction.setTransition(transactionType);
+
+            fragmentTransaction.setTransition(transaction);
             fragmentTransaction.commit();
 
             setOrientation(MDF_Fragment.getScreenOrientation());
@@ -189,7 +206,6 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
         unbindService(serviceConnection);
     }
 
-
     @Override
     public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
         if(keyCode != KeyEvent.KEYCODE_BACK){
@@ -197,7 +213,7 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
         }else{
             if (m_MDF_Name != WT_MainDisplayFragment.MDF_NAME.MDF_BASE)
             {
-                changeMDF(WT_MainDisplayFragment.MDF_NAME.MDF_BASE);
+                changeMDF(WT_MainDisplayFragment.MDF_NAME.MDF_BASE,FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
             }
             else
             {

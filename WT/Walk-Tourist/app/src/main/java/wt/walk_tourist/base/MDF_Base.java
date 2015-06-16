@@ -1,6 +1,5 @@
 package wt.walk_tourist.base;
 
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -8,12 +7,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import wt.walk_tourist.R;
+import wt.walk_tourist.define.Define;
 import wt.walk_tourist.parts_fragment.PDF_WalkAnimation_Texture;
 import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 import wt.walk_tourist.wt_fragment.WT_PartsDisplayFragment;
 
 public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickListener {
 
+    // SoundPool用ID
     private int mSoundId;
 
     @Override
@@ -32,14 +33,13 @@ public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickList
 
         mSoundId = mSoundPool.load(getActivity().getBaseContext(),R.raw.system49,1);
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        WT_PartsDisplayFragment walkAnimation_Texture = new PDF_WalkAnimation_Texture();
+        Bundle args = new Bundle();
+        args.putInt(WT_PartsDisplayFragment.BUNDLE_KEY.BUNDLE_KEY_WIDTH.getKey(), m_LayoutWidth);
+        args.putInt(WT_PartsDisplayFragment.BUNDLE_KEY.BUNDLE_KEY_HEIGHT.getKey(), m_LayoutHeight);
 
-        WT_PartsDisplayFragment base_Texture_Fragment = new PDF_WalkAnimation_Texture();
-        fragmentTransaction.replace(R.id.base_texture_fragment, base_Texture_Fragment, "base_texture_fragment");
-
-        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_NONE);
-        fragmentTransaction.commit();
+        walkAnimation_Texture.setArguments(args);
+        addPartsDisplayFragment(R.id.base_texture_fragment, walkAnimation_Texture, "base_texture_fragment");
 
     }
 
@@ -58,69 +58,60 @@ public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickList
 
     }
 
-    @Override
-    public void onClick(View view) {
-
-        FragmentManager fragmentManager = getFragmentManager();
-        PDF_WalkAnimation_Texture fragment = (PDF_WalkAnimation_Texture)fragmentManager.findFragmentByTag("base_texture_fragment");
-
-
-        switch (view.getId()) {
-            case R.id.button_tourist_spot:
-                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
-                mListener.changeMDF(MDF_NAME.MDF_SPOT);
-                break;
-            case R.id.button_start_game:
-                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
-                mListener.changeMDF(MDF_NAME.MDF_GAME);
-                break;
-            case R.id.button_point_management:
-                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
-                mListener.changeMDF(MDF_NAME.MDF_POINT);
-                break;
-            case R.id.button_help:
-                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
-                mListener.changeMDF(MDF_NAME.MDF_HELP);
-                break;
-            case R.id.button_display_map:
-                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
-                mListener.changeMDF(MDF_NAME.MDF_MAP);
-                break;
-
-            case R.id.button_right:
-                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
-                fragment.changeDirection(2);
-                break;
-            case R.id.button_left:
-                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
-                fragment.changeDirection(1);
-                break;
-            case R.id.button_top:
-                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
-                fragment.changeDirection(3);
-                break;
-            case R.id.button_bottom:
-                mSoundPool.play(mSoundId,1.0f,1.0f,0,0,1.0f);
-                fragment.changeDirection(0);
-                break;
+    private void changeDirection(Define.DIRECTION_DEF Direction)
+    {
+        PDF_WalkAnimation_Texture fragment = (PDF_WalkAnimation_Texture)getPartsDisplayFragment("base_texture_fragment");
+        if( null != fragment ) {
+            fragment.changeDirection(Direction);
         }
     }
 
     @Override
-    public void removeChildFragment()
-    {
-        FragmentManager fragmentManager = getFragmentManager();
+    public void onClick(View view) {
 
-        // PDF_Remove処理
-        WT_PartsDisplayFragment oldMainDisplayFragment = (WT_PartsDisplayFragment)fragmentManager.findFragmentByTag("base_texture_fragment");
+        switch (view.getId()) {
+            case R.id.button_tourist_spot:
+                mSoundPool.defPlay(mSoundId);
+                mListener.changeMDF(MDF_NAME.MDF_SPOT, FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                break;
+            case R.id.button_start_game:
+                mSoundPool.defPlay(mSoundId);
+                mListener.changeMDF(MDF_NAME.MDF_GAME, FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                break;
+            case R.id.button_point_management:
+                mSoundPool.defPlay(mSoundId);
+                mListener.changeMDF(MDF_NAME.MDF_POINT, FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                break;
+            case R.id.button_help:
+                mSoundPool.defPlay(mSoundId);
+                mListener.changeMDF(MDF_NAME.MDF_HELP, FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                break;
+            case R.id.button_display_map:
+                mSoundPool.defPlay(mSoundId);
+                mListener.changeMDF(MDF_NAME.MDF_MAP, FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                break;
 
-        oldMainDisplayFragment.releaseParts();
-
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-        fragmentTransaction.remove(oldMainDisplayFragment);
-
-        fragmentTransaction.commit();
+            case R.id.button_bottom:
+                mSoundPool.defPlay(mSoundId);
+                changeDirection(Define.DIRECTION_DEF.DOWN);
+                break;
+            case R.id.button_left:
+                mSoundPool.defPlay(mSoundId);
+                changeDirection(Define.DIRECTION_DEF.LEFT);
+                break;
+            case R.id.button_right:
+                mSoundPool.defPlay(mSoundId);
+                changeDirection(Define.DIRECTION_DEF.RIGHT);
+                break;
+            case R.id.button_top:
+                mSoundPool.defPlay(mSoundId);
+                changeDirection(Define.DIRECTION_DEF.UP);
+                break;
+        }
     }
 
+    public int getBGMResId()
+    {
+        return R.raw.bgm01;
+    }
 }

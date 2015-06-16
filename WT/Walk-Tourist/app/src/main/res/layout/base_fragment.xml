@@ -11,14 +11,14 @@
 
         <!-- PartsDisplayFragment の 入れ物 -->
         <FrameLayout
-            android:layout_below="@+id/main_fragment"
+            android:layout_below="@+id/base_fragment"
             android:id="@+id/base_texture_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             />
 
         <LinearLayout
-            android:layout_below="@+id/main_fragment"
+            android:layout_below="@+id/base_fragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">

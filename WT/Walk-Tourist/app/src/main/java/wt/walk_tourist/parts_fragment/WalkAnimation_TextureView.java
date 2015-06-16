@@ -9,16 +9,15 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.TextureView;
 
-import java.io.InputStream;
-
 import wt.walk_tourist.R;
 import wt.walk_tourist.animation.A_Character;
+import wt.walk_tourist.define.Define;
 
 /**
  * Created by taguchi on 2015/06/08.
- * 背景が流れるView
+ * 背景が流れるViewとそれに乗っかるキャラクター
  */
-public class PDF_WalkAnimation_TextureView extends TextureView implements TextureView.SurfaceTextureListener, Runnable{
+public class WalkAnimation_TextureView extends TextureView implements TextureView.SurfaceTextureListener, Runnable{
 
     private A_Character mCharacter;
 
@@ -29,20 +28,20 @@ public class PDF_WalkAnimation_TextureView extends TextureView implements Textur
     private int mImageWidth;
     private int mX;
 
-    private int mDirection;
+    private Define.DIRECTION_DEF mDirection;
 
-    public PDF_WalkAnimation_TextureView(Context context)
+    public WalkAnimation_TextureView(Context context)
     {
         super(context);
         setSurfaceTextureListener(this);
     }
 
-    public PDF_WalkAnimation_TextureView(Context context, AttributeSet attrs) {
+    public WalkAnimation_TextureView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setSurfaceTextureListener(this);
     }
 
-    public PDF_WalkAnimation_TextureView(Context context, AttributeSet attrs,  int defStyle) {
+    public WalkAnimation_TextureView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setSurfaceTextureListener(this);
     }
@@ -57,10 +56,8 @@ public class PDF_WalkAnimation_TextureView extends TextureView implements Textur
 
         mDispWidth = getWidth();
 
-//        InputStream input_stream = getResources().openRawResource(R.drawable.c01_32);
-
-        mDirection = 2;
-        mCharacter = new A_Character(getResources().openRawResource(R.raw.c01_32));
+        mDirection = Define.DIRECTION_DEF.RIGHT;
+        mCharacter = new A_Character(getResources().openRawResource(R.raw.c01_32),32,500,1000,3);
 
         mX = 0;
         //スレッドの開始
@@ -81,19 +78,19 @@ public class PDF_WalkAnimation_TextureView extends TextureView implements Textur
         // TODO 描画内容更新処理
         switch(mDirection)
         {
-            case 0:
+            case DOWN:
                 mCharacter.updateYPos(1);
                 break;
 
-            case 1:
+            case LEFT:
                 mX = mX +1;
                 break;
 
-            case 2:
+            case RIGHT:
                 mX = mX -1;
                 break;
 
-            case 3:
+            case UP:
                 mCharacter.updateYPos(-1);
                 break;
         }
@@ -175,7 +172,7 @@ public class PDF_WalkAnimation_TextureView extends TextureView implements Textur
         }
     }
 
-    void changeDirection(int direction)
+    void changeDirection(Define.DIRECTION_DEF direction)
     {
         mDirection = direction;
         mCharacter.changeDirection(direction);

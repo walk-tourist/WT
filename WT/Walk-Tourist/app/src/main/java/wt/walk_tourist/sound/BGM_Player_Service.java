@@ -62,8 +62,10 @@ public class BGM_Player_Service extends Service {
     private void changeBGM(int bgmResId)
     {
         releaseMp();
-        mMp = MediaPlayer.create(this,bgmResId);
-        mMp.setLooping(true);
+        if( 0 != bgmResId ) {
+            mMp = MediaPlayer.create(this, bgmResId);
+            mMp.setLooping(true);
+        }
         mPlayBGMResId = bgmResId;
     }
 
@@ -73,7 +75,10 @@ public class BGM_Player_Service extends Service {
         {
             changeBGM(bgmResId);
         }
-        mMp.start();
+        if ( null != mMp )
+        {
+            mMp.start();
+        }
     }
 
     public void stopBGM()

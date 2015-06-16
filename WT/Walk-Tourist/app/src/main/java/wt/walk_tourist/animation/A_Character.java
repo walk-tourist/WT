@@ -4,61 +4,58 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapRegionDecoder;
 import android.graphics.Rect;
-import android.media.Image;
 import android.util.Log;
-import android.widget.ImageView;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
-import wt.walk_tourist.R;
+import wt.walk_tourist.define.Define;
 
 /**
  * Created by user on 2015/06/14.
+ * キャラクタークラス
  */
 public class A_Character {
 
     private InputStream mInputStream;
     private int mCharacterSize;
     private int mChangeCount;
-
-    private int mAnimationCount;
-    private int mDirection;
-
     private int mXPos;
     private int mYPos;
+    private int mPattern;
 
+    private int mAnimationCount;
+    private Define.DIRECTION_DEF mDirection;
+
+    class BitmapPattern
+    {
+        Bitmap bitmap;
+        int pattern;
+    }
     // 左歩き
-    Bitmap lw_1;
-    Bitmap lw_2;
-    Bitmap lw_3;
+    ArrayList<BitmapPattern> lw = new ArrayList<BitmapPattern>();
 
     // 右歩き
-    Bitmap rw_1;
-    Bitmap rw_2;
-    Bitmap rw_3;
+    ArrayList<BitmapPattern> rw = new ArrayList<BitmapPattern>();
 
     // 上歩き
-    Bitmap tw_1;
-    Bitmap tw_2;
-    Bitmap tw_3;
+    ArrayList<BitmapPattern> tw = new ArrayList<BitmapPattern>();
 
     // 下歩き
-    Bitmap bw_1;
-    Bitmap bw_2;
-    Bitmap bw_3;
+    ArrayList<BitmapPattern> bw = new ArrayList<BitmapPattern>();
 
-    public A_Character(InputStream inputStream)
+    public A_Character(InputStream inputStream, int size, int xPos, int yPos, int pattern)
     {
         mInputStream = inputStream;
-        mCharacterSize = 32; // TODO 今は決めうちの32 後々はファイル名から取得したい
-        mChangeCount = 20; // TODO 20回描画で次に切り替わり
+        mCharacterSize = size;
+        mXPos = xPos;
+        mYPos = yPos;
+        mPattern = pattern;
 
         mAnimationCount = 0;
-        mDirection = 2; // 0:下 1:左  2:右  3:上 TODO 後々は定義化
-
-        mXPos = 500;
-        mYPos = 1000;
+        mChangeCount = 20;
+        mDirection = Define.DIRECTION_DEF.RIGHT;
 
         createImage();
     }
@@ -67,44 +64,45 @@ public class A_Character {
     {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inJustDecodeBounds = false; // 実際に画像を読み込む(false)
-        Rect rect = new Rect(0,0,mCharacterSize,mCharacterSize);
-        bw_1 = decoder.decodeRegion(rect, options);
+        Rect rect = new Rect(0,0,0,0);
 
-        rect.set(mCharacterSize,0,mCharacterSize*2,mCharacterSize);
-        bw_2 = decoder.decodeRegion(rect, options);
+        for( int i = 0 ; i < mPattern; i++ )
+        {
+            rect.set( i * mCharacterSize, 0, mCharacterSize * ( 1 + i ), mCharacterSize);
+            BitmapPattern bitmapPattern = new BitmapPattern();
+            bitmapPattern.bitmap = decoder.decodeRegion(rect, options);
+            bitmapPattern.pattern = i;
+            bw.add(bitmapPattern);
+        }
 
-        rect.set(mCharacterSize*2,0,mCharacterSize*3,mCharacterSize);
-        bw_3 = decoder.decodeRegion(rect, options);
+        for( int i = 0 ; i < mPattern; i++ )
+        {
+            rect.set( i * mCharacterSize, mCharacterSize, mCharacterSize * ( 1 + i ), mCharacterSize*2);
+            BitmapPattern bitmapPattern = new BitmapPattern();
+            bitmapPattern.bitmap = decoder.decodeRegion(rect, options);
+            bitmapPattern.pattern = i;
+            lw.add(bitmapPattern);
+        }
 
-        rect.set(0,mCharacterSize,mCharacterSize,mCharacterSize*2);
-        lw_1 = decoder.decodeRegion(rect, options);
+        for( int i = 0 ; i < mPattern; i++ )
+        {
+            rect.set( i * mCharacterSize, mCharacterSize*2, mCharacterSize * ( 1 + i ), mCharacterSize*3);
+            BitmapPattern bitmapPattern = new BitmapPattern();
+            bitmapPattern.bitmap = decoder.decodeRegion(rect, options);
+            bitmapPattern.pattern = i;
+            rw.add(bitmapPattern);
+        }
 
-        rect.set(mCharacterSize,mCharacterSize,mCharacterSize*2,mCharacterSize*2);
-        lw_2 = decoder.decodeRegion(rect, options);
-
-        rect.set(mCharacterSize*2,mCharacterSize,mCharacterSize*3,mCharacterSize*2);
-        lw_3 = decoder.decodeRegion(rect, options);
-
-        rect.set(0, mCharacterSize*2, mCharacterSize, mCharacterSize*3);
-        rw_1 = decoder.decodeRegion(rect, options);
-
-        rect.set(mCharacterSize,mCharacterSize*2,mCharacterSize*2,mCharacterSize*3);
-        rw_2 = decoder.decodeRegion(rect, options);
-
-        rect.set(mCharacterSize*2,mCharacterSize*2,mCharacterSize*3,mCharacterSize*3);
-        rw_3 = decoder.decodeRegion(rect, options);
-
-        rect.set(0, mCharacterSize*3, mCharacterSize, mCharacterSize*4);
-        tw_1 = decoder.decodeRegion(rect, options);
-
-        rect.set(mCharacterSize,mCharacterSize*3,mCharacterSize*2,mCharacterSize*4);
-        tw_2 = decoder.decodeRegion(rect, options);
-
-        rect.set(mCharacterSize*2,mCharacterSize*3,mCharacterSize*3,mCharacterSize*4);
-        tw_3 = decoder.decodeRegion(rect, options);
+        for( int i = 0 ; i < mPattern; i++ )
+        {
+            rect.set( i * mCharacterSize, mCharacterSize*3, mCharacterSize * ( 1 + i ), mCharacterSize*4);
+            BitmapPattern bitmapPattern = new BitmapPattern();
+            bitmapPattern.bitmap = decoder.decodeRegion(rect, options);
+            bitmapPattern.pattern = i;
+            tw.add(bitmapPattern);
+        }
 
     }
-
 
     private void createImage()
     {
@@ -113,10 +111,9 @@ public class A_Character {
 
             createBitmap(regionDecoder);
 
-            //R.drawable.c01_32
         }catch (IOException e)
         {
-
+            Log.e("","");
         }finally{
             if(mInputStream != null)
             {
@@ -125,97 +122,63 @@ public class A_Character {
                 }
                 catch(IOException e)
                 {
-
+                    Log.e("","");
                 }
             }
         }
-
-
     }
 
-    public void changeDirection(int direction)
+    public void changeDirection( Define.DIRECTION_DEF direction)
     {
         mDirection = direction;
     }
 
     private int getPattern()
     {
+        int r;
         mAnimationCount++;
-
-        if( mChangeCount*4 == mAnimationCount)
+        if( mChangeCount*(mPattern+(-2+mPattern)) <= mAnimationCount)
         {
             mAnimationCount = 0;
         }
 
-        if( mAnimationCount < mChangeCount )
+        if ( ( mAnimationCount / mChangeCount ) < mPattern )
         {
-            return 0;
-        }
-        else if ( mAnimationCount < mChangeCount*2 )
-        {
-            return 1;
-        }
-        else if ( mAnimationCount < mChangeCount*3 )
-        {
-            return 2;
+            return ( mAnimationCount / mChangeCount ) % mPattern;
         }
         else
         {
-            return 1;
+            return mPattern - ( 2 + ( ( mAnimationCount / mChangeCount ) % mPattern ));
         }
     }
 
-    public Bitmap getAnimationBitmap()
-    {
-        Bitmap rBitmap = null;
+    public Bitmap getAnimationBitmap() {
+        ArrayList<BitmapPattern> bpl = null;
         int pattern = getPattern();
 
-        switch ( mDirection )
-        {
-            case 0:
-                if( 0 == pattern ) {
-                    rBitmap = bw_1;
-                }else if( 1 == pattern ) {
-                    rBitmap = bw_2;
-                }else{
-                    rBitmap = bw_3;
-                }
+        switch (mDirection) {
+            case DOWN:
+                bpl = bw;
                 break;
-            case 1:
-                if( 0 == pattern ) {
-                    rBitmap = lw_1;
-                }else if( 1 == pattern ) {
-                    rBitmap = lw_2;
-                }else{
-                    rBitmap = lw_3;
-                }
+            case LEFT:
+                bpl = lw;
                 break;
-            case 2:
-                if( 0 == pattern ) {
-                    rBitmap = rw_1;
-                }else if( 1 == pattern ) {
-                    rBitmap = rw_2;
-                }else{
-                    rBitmap = rw_3;
-                }
+            case RIGHT:
+                bpl = rw;
                 break;
-            case 3:
-                if( 0 == pattern ) {
-                    rBitmap = tw_1;
-                }else if( 1 == pattern ) {
-                    rBitmap = tw_2;
-                }else{
-                    rBitmap = tw_3;
-                }
+            case UP:
+                bpl = tw;
                 break;
         }
-        if(rBitmap == null )
-        {
-            Log.e("","");
-
+        if (null != bpl) {
+            for (int i = 0; i < bpl.size(); i++) {
+                BitmapPattern bp = bpl.get(i);
+                if (bp.pattern == pattern) {
+                    return bp.bitmap;
+                }
+            }
         }
-
-        return rBitmap;
+        return null;
     }
 
     public void updateXPos(int x)

@@ -1,6 +1,5 @@
 package wt.walk_tourist.point_management;
 
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.ViewGroup;
 
 import wt.walk_tourist.R;
 import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
-import wt.walk_tourist.game.D_Game_Contents;
 
 public class MDF_PointManagement extends WT_MainDisplayFragment implements View.OnClickListener {
 
@@ -37,14 +35,8 @@ public class MDF_PointManagement extends WT_MainDisplayFragment implements View.
     public void onClick(View view) {
         if (view.getId() == R.id.point_management_back_button) {
             // TODO この画面を閉じる
-            mListener.changeMDF(MDF_NAME.MDF_BASE);
+            mListener.changeMDF(MDF_NAME.MDF_BASE,FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
 
         }
-    }
-
-    @Override
-    public void removeChildFragment()
-    {
-
     }
 }

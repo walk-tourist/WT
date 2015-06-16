@@ -7,9 +7,4 @@ import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
  */
 public class MDF_Help extends WT_MainDisplayFragment {
 
-    @Override
-    public void removeChildFragment()
-    {
-
-    }
 }

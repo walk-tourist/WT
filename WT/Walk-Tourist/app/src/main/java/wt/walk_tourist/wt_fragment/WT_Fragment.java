@@ -30,6 +30,19 @@ import android.app.Fragment;
  */
 public class WT_Fragment extends Fragment {
 
+    protected int m_LayoutWidth;
+    protected int m_LayoutHeight;
+
     public WT_Fragment() {}
+
+    public int getLayoutWidth()
+    {
+        return m_LayoutWidth;
+    }
+
+    public int getLayoutHeight()
+    {
+        return m_LayoutHeight;
+    }
 
 }
