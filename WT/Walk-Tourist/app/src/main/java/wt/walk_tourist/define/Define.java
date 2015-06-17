@@ -5,6 +5,9 @@ package wt.walk_tourist.define;
  * define
  */
 public class Define {
+
+    public static final int FPS60 = ( 1000 / 60 );
+
     public enum DIRECTION_DEF{
         UP,
         DOWN,

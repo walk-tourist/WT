@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.SurfaceTexture;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -25,8 +27,19 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
     private boolean mRunning = false;
     private Bitmap mHaikei;
     private int mDispWidth;
+    private int mDispHeight;
     private int mImageWidth;
     private int mX;
+
+    private long mDelta;
+    private long mTime;
+
+    private int mAnimationCount;
+
+    private String mFps;
+
+    private Paint mPaint;
+
 
     private Define.DIRECTION_DEF mDirection;
 
@@ -54,10 +67,12 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
 
         mImageWidth = mHaikei.getWidth();
 
-        mDispWidth = getWidth();
-
         mDirection = Define.DIRECTION_DEF.RIGHT;
-        mCharacter = new A_Character(getResources().openRawResource(R.raw.c01_32),32,500,1000,3);
+        mCharacter = new A_Character(getResources().openRawResource(R.raw.c01_32),32,(int)(mDispWidth*0.2f),(int)(mDispHeight*0.15f),mDispWidth/2,mDispHeight/2,3,mDirection);
+
+        mPaint = new Paint();
+        mPaint.setColor(Color.BLACK);
+        mPaint.setTextSize(50);
 
         mX = 0;
         //スレッドの開始
@@ -79,19 +94,19 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
         switch(mDirection)
         {
             case DOWN:
-                mCharacter.updateYPos(1);
+                mCharacter.updateYPos(mAnimationCount);
                 break;
 
             case LEFT:
-                mX = mX +1;
+                mX = mX +mAnimationCount;
                 break;
 
             case RIGHT:
-                mX = mX -1;
+                mX = mX -mAnimationCount;
                 break;
 
             case UP:
-                mCharacter.updateYPos(-1);
+                mCharacter.updateYPos(-mAnimationCount);
                 break;
         }
     }
@@ -108,6 +123,7 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
     public void setBitmapRelease()
     {
         // TODO 加工したBITMAPのリサイクル処理
+        mCharacter.BitmapRelease();
 
     }
 
@@ -130,6 +146,27 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
     @Override
     public void run() {
         while( mRunning ){
+
+            mDelta = System.currentTimeMillis() - mTime;
+            mTime = System.currentTimeMillis();
+
+            if(mDelta < Define.FPS60)
+            {
+                mFps = "60Fps";
+                mAnimationCount = 1;
+                try{
+                    Thread.sleep( Define.FPS60 - mDelta );
+                }catch (InterruptedException e){
+                }
+
+            }
+            else
+            {
+                mFps = 1000/mDelta +"Fps";
+                mAnimationCount = (int)(mDelta / Define.FPS60);
+                mTime = mTime - ( mDelta % Define.FPS60 );
+            }
+
             //Canvasの取得(マルチスレッド環境対応のためLock)
             Canvas canvas = lockCanvas();
 
@@ -143,10 +180,10 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
                     mX = 0;
                 }
                 // 画像を右に流しきった場合
-                else if ( mImageWidth == mX )
+                else if ( mDispWidth == mX )
                 {
                     // 初期位置に戻す
-                    mX = mImageWidth - mDispWidth;
+                    mX = -(mImageWidth - mDispWidth);
                 }
                 // 1枚目の画像描画
                 canvas.drawBitmap(mHaikei, mX, 0, null);
@@ -166,6 +203,8 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
                 // キャラクター描画
                 canvas.drawBitmap(mCharacter.getAnimationBitmap(),mCharacter.getXPos(),mCharacter.getYPos(),null);
 
+                canvas.drawText(mFps,100,200,mPaint);
+
                 //LockしたCanvasを解放、ほかの描画処理スレッドがあればそちらに。
                 unlockCanvasAndPost(canvas);
             }
@@ -176,5 +215,11 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
     {
         mDirection = direction;
         mCharacter.changeDirection(direction);
+    }
+
+    public void setViewSize(int width, int height)
+    {
+        mDispWidth = width;
+        mDispHeight = height;
     }
 }

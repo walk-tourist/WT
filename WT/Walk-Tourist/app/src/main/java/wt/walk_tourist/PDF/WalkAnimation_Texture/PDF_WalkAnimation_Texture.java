@@ -23,6 +23,19 @@ public class PDF_WalkAnimation_Texture extends WT_PartsDisplayFragment {
         return inflater.inflate(R.layout.walk_animation_texture_fragment, container, false);
     }
 
+    @Override
+    public void onStart()
+    {
+        super.onStart();
+
+        if( null == m_WalkAnimation_TextureView) {
+            getWalkAnimation_TextureView();
+        }
+        if( null != m_WalkAnimation_TextureView) {
+            m_WalkAnimation_TextureView.setViewSize(m_LayoutWidth,m_LayoutHeight);
+        }
+    }
+
     private void getWalkAnimation_TextureView()
     {
         View v = getView();

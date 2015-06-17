@@ -19,7 +19,10 @@ import wt.walk_tourist.define.Define;
 public class A_Character {
 
     private InputStream mInputStream;
-    private int mCharacterSize;
+    private int mCatSize;
+    private int mCharacterSizeX;
+    private int mCharacterSizeY;
+
     private int mChangeCount;
     private int mXPos;
     private int mYPos;
@@ -45,19 +48,30 @@ public class A_Character {
     // 下歩き
     ArrayList<BitmapPattern> bw = new ArrayList<BitmapPattern>();
 
-    public A_Character(InputStream inputStream, int size, int xPos, int yPos, int pattern)
+    public A_Character(InputStream inputStream, int size, int cXSize, int cYSize, int xPos, int yPos, int pattern, Define.DIRECTION_DEF direction)
     {
         mInputStream = inputStream;
-        mCharacterSize = size;
-        mXPos = xPos;
-        mYPos = yPos;
+        mCatSize = size;
+        mCharacterSizeX = cXSize;
+        mCharacterSizeY = cYSize;
+
+        // 縦横同じにする場合
+        //  mCharacterSizeX = mCharacterSizeY;
+
+        mXPos = xPos - (cXSize / 2);
+        mYPos = yPos - (cYSize / 2);
         mPattern = pattern;
 
         mAnimationCount = 0;
         mChangeCount = 20;
-        mDirection = Define.DIRECTION_DEF.RIGHT;
+        mDirection = direction;
 
         createImage();
+    }
+
+    public static Bitmap getCreateScaledBitmap( Bitmap bitmap, int width, int height )
+    {
+        return Bitmap.createScaledBitmap( bitmap, width, height, true );
     }
 
     private void createBitmap(BitmapRegionDecoder decoder )
@@ -68,40 +82,68 @@ public class A_Character {
 
         for( int i = 0 ; i < mPattern; i++ )
         {
-            rect.set( i * mCharacterSize, 0, mCharacterSize * ( 1 + i ), mCharacterSize);
+            rect.set( i * mCatSize, 0, mCatSize * ( 1 + i ), mCatSize);
             BitmapPattern bitmapPattern = new BitmapPattern();
-            bitmapPattern.bitmap = decoder.decodeRegion(rect, options);
+            bitmapPattern.bitmap = getCreateScaledBitmap( decoder.decodeRegion(rect, options), mCharacterSizeX, mCharacterSizeY);
             bitmapPattern.pattern = i;
             bw.add(bitmapPattern);
         }
 
         for( int i = 0 ; i < mPattern; i++ )
         {
-            rect.set( i * mCharacterSize, mCharacterSize, mCharacterSize * ( 1 + i ), mCharacterSize*2);
+            rect.set( i * mCatSize, mCatSize, mCatSize * ( 1 + i ), mCatSize*2);
             BitmapPattern bitmapPattern = new BitmapPattern();
-            bitmapPattern.bitmap = decoder.decodeRegion(rect, options);
+            bitmapPattern.bitmap = getCreateScaledBitmap(decoder.decodeRegion(rect, options), mCharacterSizeX, mCharacterSizeY);
             bitmapPattern.pattern = i;
             lw.add(bitmapPattern);
         }
 
         for( int i = 0 ; i < mPattern; i++ )
         {
-            rect.set( i * mCharacterSize, mCharacterSize*2, mCharacterSize * ( 1 + i ), mCharacterSize*3);
+            rect.set( i * mCatSize, mCatSize*2, mCatSize * ( 1 + i ), mCatSize*3);
             BitmapPattern bitmapPattern = new BitmapPattern();
-            bitmapPattern.bitmap = decoder.decodeRegion(rect, options);
+            bitmapPattern.bitmap = getCreateScaledBitmap(decoder.decodeRegion(rect, options), mCharacterSizeX, mCharacterSizeY);
             bitmapPattern.pattern = i;
             rw.add(bitmapPattern);
         }
 
         for( int i = 0 ; i < mPattern; i++ )
         {
-            rect.set( i * mCharacterSize, mCharacterSize*3, mCharacterSize * ( 1 + i ), mCharacterSize*4);
+            rect.set( i * mCatSize, mCatSize*3, mCatSize * ( 1 + i ), mCatSize*4);
             BitmapPattern bitmapPattern = new BitmapPattern();
-            bitmapPattern.bitmap = decoder.decodeRegion(rect, options);
+            bitmapPattern.bitmap = getCreateScaledBitmap(decoder.decodeRegion(rect, options), mCharacterSizeX, mCharacterSizeY);
             bitmapPattern.pattern = i;
             tw.add(bitmapPattern);
         }
 
+    }
+
+    public void BitmapRelease()
+    {
+        if (null != bw) {
+            for (int i = 0; i < bw.size(); i++) {
+                BitmapPattern bp = bw.get(i);
+                bp.bitmap.recycle();
+            }
+        }
+        if (null != lw) {
+            for (int i = 0; i < lw.size(); i++) {
+                BitmapPattern bp = lw.get(i);
+                bp.bitmap.recycle();
+            }
+        }
+        if (null != rw) {
+            for (int i = 0; i < rw.size(); i++) {
+                BitmapPattern bp = rw.get(i);
+                bp.bitmap.recycle();
+            }
+        }
+        if (null != tw) {
+            for (int i = 0; i < tw.size(); i++) {
+                BitmapPattern bp = tw.get(i);
+                bp.bitmap.recycle();
+            }
+        }
     }
 
     private void createImage()
