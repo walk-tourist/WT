@@ -1,4 +1,4 @@
-package wt.walk_tourist.game;
+package wt.walk_tourist.MDF.game;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;

@@ -1,4 +1,4 @@
-package wt.walk_tourist.map;
+package wt.walk_tourist.PDF.Map;
 
 
 import android.os.Bundle;
@@ -10,8 +10,8 @@ import wt.walk_tourist.R;
 import wt.walk_tourist.wt_fragment.WT_PartsDisplayFragment;
 
 /**
- * ƒp[ƒc‚Ìƒ}ƒbƒvƒtƒ‰ƒOƒƒ“ƒgƒNƒ‰ƒX
- * ‚Æ‚è‚ ‚¦‚¸ƒŒƒCƒAƒEƒg‚Íƒ}ƒbƒvƒ“‚Ì‚İ
+ * ï¿½pï¿½[ï¿½cï¿½Ìƒ}ï¿½bï¿½vï¿½tï¿½ï¿½ï¿½Oï¿½ï¿½ï¿½ï¿½ï¿½gï¿½Nï¿½ï¿½ï¿½X
+ * ï¿½Æ‚è‚ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Cï¿½Aï¿½Eï¿½gï¿½Íƒ}ï¿½bï¿½vï¿½ï¿½ï¿½Ì‚ï¿½
  */
 public class PDF_Map extends WT_PartsDisplayFragment {
     @Override

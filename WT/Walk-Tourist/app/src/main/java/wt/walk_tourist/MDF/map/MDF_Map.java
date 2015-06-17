@@ -1,4 +1,4 @@
-package wt.walk_tourist.map;
+package wt.walk_tourist.MDF.map;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -9,7 +9,7 @@ import wt.walk_tourist.R;
 import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
 /**
- * PDF_Map‚ðŽg—p‚·‚éƒNƒ‰ƒX
+ * PDF_Mapï¿½ï¿½ï¿½gï¿½pï¿½ï¿½ï¿½ï¿½Nï¿½ï¿½ï¿½X
  */
 public class MDF_Map extends WT_MainDisplayFragment {
 

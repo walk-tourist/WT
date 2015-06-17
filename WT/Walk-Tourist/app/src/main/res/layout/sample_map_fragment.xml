@@ -39,7 +39,7 @@
     <fragment
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="wt.walk_tourist.map.PDF_Map_MapFragment"
+        android:name="wt.walk_tourist.PDF.Map.Map_MapFragment"
         android:id="@+id/fragment"
         android:layout_gravity="center_horizontal" />
 

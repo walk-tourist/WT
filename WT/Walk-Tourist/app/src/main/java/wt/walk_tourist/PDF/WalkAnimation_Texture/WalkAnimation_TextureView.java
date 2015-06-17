@@ -1,4 +1,4 @@
-package wt.walk_tourist.parts_fragment;
+package wt.walk_tourist.PDF.WalkAnimation_Texture;
 
 import android.content.Context;
 import android.graphics.Bitmap;

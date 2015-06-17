@@ -1,4 +1,4 @@
-package wt.walk_tourist.tourist_spot;
+package wt.walk_tourist.MDF.tourist_spot;
 
 import android.content.Context;
 import android.view.LayoutInflater;

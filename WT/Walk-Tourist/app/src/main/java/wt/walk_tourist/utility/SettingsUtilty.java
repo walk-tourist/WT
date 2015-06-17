@@ -1,4 +1,4 @@
-package wt.walk_tourist.tourist_spot.utility;
+package wt.walk_tourist.utility;
 
 import android.util.Log;
 

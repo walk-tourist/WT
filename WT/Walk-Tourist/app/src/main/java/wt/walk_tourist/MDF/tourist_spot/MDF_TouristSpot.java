@@ -1,6 +1,5 @@
-package wt.walk_tourist.tourist_spot;
+package wt.walk_tourist.MDF.tourist_spot;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;

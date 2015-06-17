@@ -15,13 +15,13 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.RelativeLayout;
 
-import wt.walk_tourist.base.MDF_Base;
-import wt.walk_tourist.game.MDF_Game_Contents;
-import wt.walk_tourist.help.MDF_Help;
-import wt.walk_tourist.point_management.MDF_PointManagement;
+import wt.walk_tourist.MDF.base.MDF_Base;
+import wt.walk_tourist.MDF.game.MDF_Game_Contents;
+import wt.walk_tourist.MDF.help.MDF_Help;
+import wt.walk_tourist.MDF.point_management.MDF_PointManagement;
 import wt.walk_tourist.sound.BGM_Player_Service;
-import wt.walk_tourist.startup.MDF_StartUp;
-import wt.walk_tourist.tourist_spot.MDF_TouristSpot;
+import wt.walk_tourist.MDF.startup.MDF_StartUp;
+import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot;
 import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
 public class MainActivity extends Activity implements WT_MainDisplayFragment.MainFragmentListener {

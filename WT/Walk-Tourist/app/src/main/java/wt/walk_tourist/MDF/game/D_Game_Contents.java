@@ -1,4 +1,4 @@
-package wt.walk_tourist.game;
+package wt.walk_tourist.MDF.game;
 
 /**
  * Created by User on 2015/05/09.

@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <wt.walk_tourist.parts_fragment.WalkAnimation_TextureView
+    <wt.walk_tourist.PDF.WalkAnimation_Texture.WalkAnimation_TextureView
         android:id="@+id/walk_animation_texture"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

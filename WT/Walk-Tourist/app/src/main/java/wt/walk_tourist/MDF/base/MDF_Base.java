@@ -1,4 +1,4 @@
-package wt.walk_tourist.base;
+package wt.walk_tourist.MDF.base;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import wt.walk_tourist.R;
 import wt.walk_tourist.define.Define;
-import wt.walk_tourist.parts_fragment.PDF_WalkAnimation_Texture;
+import wt.walk_tourist.PDF.WalkAnimation_Texture.PDF_WalkAnimation_Texture;
 import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 import wt.walk_tourist.wt_fragment.WT_PartsDisplayFragment;
 

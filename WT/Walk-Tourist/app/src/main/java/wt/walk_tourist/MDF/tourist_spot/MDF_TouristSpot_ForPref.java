@@ -1,4 +1,4 @@
-package wt.walk_tourist.tourist_spot;
+package wt.walk_tourist.MDF.tourist_spot;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wt.walk_tourist.R;
-import wt.walk_tourist.tourist_spot.utility.SettingsUtilty;
+import wt.walk_tourist.utility.SettingsUtilty;
 
 
 public class MDF_TouristSpot_ForPref extends MDF_TouristSpot {

@@ -1,4 +1,4 @@
-package wt.walk_tourist.point_management;
+package wt.walk_tourist.MDF.point_management;
 
 import android.app.FragmentTransaction;
 import android.os.Bundle;

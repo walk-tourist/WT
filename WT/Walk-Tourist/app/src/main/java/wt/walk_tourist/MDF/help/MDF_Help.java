@@ -1,4 +1,4 @@
-package wt.walk_tourist.help;
+package wt.walk_tourist.MDF.help;
 
 import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
