@@ -19,7 +19,7 @@ public class MDF_Map extends WT_MainDisplayFragment {
 
         // setViewItems(v);
 
-        return inflater.inflate(R.layout.mdf_map_layout, container, false);
+        return inflater.inflate(R.layout.sample_map_fragment, container, false);
     }
 
     @Override
