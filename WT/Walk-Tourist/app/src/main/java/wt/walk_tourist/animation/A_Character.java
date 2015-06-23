@@ -16,7 +16,7 @@ import wt.walk_tourist.define.Define;
  * Created by user on 2015/06/14.
  * キャラクタークラス
  */
-public class A_Character {
+public class A_Character extends CreateBitmap{
 
     private InputStream mInputStream;
     private int mCatSize;
@@ -24,8 +24,8 @@ public class A_Character {
     private int mCharacterSizeY;
 
     private int mChangeCount;
-    private int mXPos;
-    private int mYPos;
+    private int mPosX;
+    private int mPosY;
     private int mPattern;
 
     private int mAnimationCount;
@@ -33,6 +33,7 @@ public class A_Character {
 
     class BitmapPattern
     {
+
         Bitmap bitmap;
         int pattern;
     }
@@ -48,18 +49,18 @@ public class A_Character {
     // 下歩き
     ArrayList<BitmapPattern> bw = new ArrayList<BitmapPattern>();
 
-    public A_Character(InputStream inputStream, int size, int cXSize, int cYSize, int xPos, int yPos, int pattern, Define.DIRECTION_DEF direction)
+    public A_Character(InputStream inputStream, int size, int cSizeX, int cSizeY, int posX, int posY, int pattern, Define.DIRECTION_DEF direction)
     {
         mInputStream = inputStream;
         mCatSize = size;
-        mCharacterSizeX = cXSize;
-        mCharacterSizeY = cYSize;
+        mCharacterSizeX = cSizeX;
+        mCharacterSizeY = cSizeY;
 
         // 縦横同じにする場合
         //  mCharacterSizeX = mCharacterSizeY;
 
-        mXPos = xPos - (cXSize / 2);
-        mYPos = yPos - (cYSize / 2);
+        mPosX = posX - (cSizeX / 2);
+        mPosY = posY - (cSizeY / 2);
         mPattern = pattern;
 
         mAnimationCount = 0;
@@ -67,11 +68,6 @@ public class A_Character {
         mDirection = direction;
 
         createImage();
-    }
-
-    public static Bitmap getCreateScaledBitmap( Bitmap bitmap, int width, int height )
-    {
-        return Bitmap.createScaledBitmap( bitmap, width, height, true );
     }
 
     private void createBitmap(BitmapRegionDecoder decoder )
@@ -223,24 +219,24 @@ public class A_Character {
         return null;
     }
 
-    public void updateXPos(int x)
+    public void updatePosX(int x)
     {
-        mXPos = mXPos + x;
+        mPosX = mPosX + x;
     }
 
-    public void updateYPos(int y)
+    public void updatePosY(int y)
     {
-        mYPos = mYPos + y;
+        mPosY = mPosY + y;
     }
 
     public int getXPos()
     {
-        return mXPos;
+        return mPosX;
     }
 
     public int getYPos()
     {
-        return mYPos;
+        return mPosY;
     }
 
 }

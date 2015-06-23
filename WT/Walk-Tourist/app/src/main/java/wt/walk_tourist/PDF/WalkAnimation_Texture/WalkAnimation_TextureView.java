@@ -2,7 +2,6 @@ package wt.walk_tourist.PDF.WalkAnimation_Texture;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -12,7 +11,9 @@ import android.util.Log;
 import android.view.TextureView;
 
 import wt.walk_tourist.R;
+import wt.walk_tourist.animation.A_BackGround;
 import wt.walk_tourist.animation.A_Character;
+import wt.walk_tourist.animation.CreateBitmap;
 import wt.walk_tourist.define.Define;
 
 /**
@@ -22,21 +23,26 @@ import wt.walk_tourist.define.Define;
 public class WalkAnimation_TextureView extends TextureView implements TextureView.SurfaceTextureListener, Runnable{
 
     private A_Character mCharacter;
+    private A_BackGround mSky;
+    private A_BackGround mBuilding;
 
     private Thread mLoop;
     private boolean mRunning = false;
-    private Bitmap mHaikei;
-    private int mDispWidth;
-    private int mDispHeight;
-    private int mImageWidth;
-    private int mX;
+    private int mViewWidth;
+    private int mViewHeight;
 
-    private long mDelta;
+    //   private Bitmap mSky;
+//    private Bitmap mBuilding;
+    //   private int mSkyWidth;
+//    private int mBuildingWidth;
+    //   private int mSkyX;
+    //   private int mSkyY;
+//    private int mBuildingX;
+//    private int mBuildingY;
+
     private long mTime;
 
     private int mAnimationCount;
-
-    private String mFps;
 
     private Paint mPaint;
 
@@ -57,24 +63,29 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
     public WalkAnimation_TextureView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         setSurfaceTextureListener(this);
+
     }
 
     //サーフェイステクスチャ有効化時に呼ばれる
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface,int width,int height) {
 
-        mHaikei = BitmapFactory.decodeResource(getResources(), R.drawable.haikei);
-
-        mImageWidth = mHaikei.getWidth();
+        mSky = new A_BackGround(getResources(), R.drawable.haikei, mViewWidth, mViewHeight, mViewWidth*2, (int)(mViewHeight*0.75f));
+        mBuilding = new A_BackGround(getResources(), R.drawable.haikei, mViewWidth, mViewHeight, mViewWidth*2, (int)(mViewHeight*0.8f));
 
         mDirection = Define.DIRECTION_DEF.RIGHT;
-        mCharacter = new A_Character(getResources().openRawResource(R.raw.c01_32),32,(int)(mDispWidth*0.2f),(int)(mDispHeight*0.15f),mDispWidth/2,mDispHeight/2,3,mDirection);
+        mCharacter = new A_Character(getResources().openRawResource(R.raw.c01_32),32,(int)(mViewWidth*0.2f),(int)(mViewHeight*0.15f),mViewWidth/2,(int)(mViewHeight*0.7f),3,mDirection);
 
         mPaint = new Paint();
         mPaint.setColor(Color.BLACK);
         mPaint.setTextSize(50);
 
-        mX = 0;
+        mSky.setPosX(0);
+        mSky.setPosY(0);
+
+        mBuilding.setPosX(0);
+        mBuilding.setPosY((int)(mViewHeight*0.05f));
+
         //スレッドの開始
         mLoop = new Thread(this);
         mRunning = true;
@@ -94,19 +105,21 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
         switch(mDirection)
         {
             case DOWN:
-                mCharacter.updateYPos(mAnimationCount);
+                mCharacter.updatePosY(mAnimationCount);
                 break;
 
             case LEFT:
-                mX = mX +mAnimationCount;
+                mSky.addPosX(mAnimationCount);
+                mBuilding.addPosX(mAnimationCount*3);
                 break;
 
             case RIGHT:
-                mX = mX -mAnimationCount;
+                mSky.addPosX(-mAnimationCount);
+                mBuilding.addPosX(-mAnimationCount*3);
                 break;
 
             case UP:
-                mCharacter.updateYPos(-mAnimationCount);
+                mCharacter.updatePosY(-mAnimationCount);
                 break;
         }
     }
@@ -124,6 +137,9 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
     {
         // TODO 加工したBITMAPのリサイクル処理
         mCharacter.BitmapRelease();
+
+        mSky.BitmapRelease();
+        mBuilding.BitmapRelease();
 
     }
 
@@ -143,67 +159,76 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
     }
 
 
+    private void drawBackGround( Canvas canvas, A_BackGround backGround )
+    {
+        // 画像を左に流し切った場合
+        if ( 0 > ( backGround.getWidth() + backGround.getPosX() ) )
+        {
+            // 初期位置に戻す
+            backGround.setPosX( backGround.getWidth() + backGround.getPosX() );
+        }
+        // 画像を右に流しきった場合
+        else if ( mViewWidth < backGround.getPosX() )
+        {
+            // 初期位置に戻す
+            backGround.setPosX( -( backGround.getWidth() - mViewWidth ) + ( backGround.getPosX() - mViewWidth ));
+        }
+        // 1枚目の画像描画
+        canvas.drawBitmap(backGround.getBitmap(), backGround.getPosX(), backGround.getPosY(), null);
+
+        // 1枚目の画の右が見切れている場合
+        if ( ( backGround.getWidth() + backGround.getPosX() ) < mViewWidth )
+        {
+            // 2枚目の画像描画
+            canvas.drawBitmap(backGround.getBitmap(), backGround.getWidth() + backGround.getPosX(), backGround.getPosY(), null);
+        }
+        // 1枚目の画の左が見切れている場合
+        else if ( backGround.getPosX() > 0 )
+        {
+            // 2枚目の画像描画
+            canvas.drawBitmap(backGround.getBitmap(), - backGround.getWidth() + backGround.getPosX(), backGround.getPosY(), null);
+        }
+    }
+
     @Override
     public void run() {
         while( mRunning ){
 
-            mDelta = System.currentTimeMillis() - mTime;
+            long delta = System.currentTimeMillis() - mTime;
             mTime = System.currentTimeMillis();
+            String fps;
 
-            if(mDelta < Define.FPS60)
+            if(delta < Define.FPS60)
             {
-                mFps = "60Fps";
+                fps = "60Fps";
                 mAnimationCount = 1;
                 try{
-                    Thread.sleep( Define.FPS60 - mDelta );
+                    Thread.sleep( Define.FPS60 - delta );
                 }catch (InterruptedException e){
+                    Log.e("run","InterruptedException!!");
                 }
 
             }
             else
             {
-                mFps = 1000/mDelta +"Fps";
-                mAnimationCount = (int)(mDelta / Define.FPS60);
-                mTime = mTime - ( mDelta % Define.FPS60 );
+                fps = 1000/delta +"Fps";
+                mAnimationCount = (int)(delta / Define.FPS60);
+                mTime = mTime - ( delta % Define.FPS60 );
             }
 
             //Canvasの取得(マルチスレッド環境対応のためLock)
             Canvas canvas = lockCanvas();
 
             if (null != canvas) {
-                canvas.drawColor(0xFF000000);
+                canvas.drawColor(0xFFFFFFFF);
 
-                // 画像を左に流し切った場合
-                if ( 0 == ( mImageWidth + mX )  )
-                {
-                    // 初期位置に戻す
-                    mX = 0;
-                }
-                // 画像を右に流しきった場合
-                else if ( mDispWidth == mX )
-                {
-                    // 初期位置に戻す
-                    mX = -(mImageWidth - mDispWidth);
-                }
-                // 1枚目の画像描画
-                canvas.drawBitmap(mHaikei, mX, 0, null);
+                drawBackGround(canvas, mSky);
+                drawBackGround(canvas, mBuilding);
 
-                // 1枚目の画の右が見切れている場合
-                if ( ( mImageWidth + mX ) < mDispWidth )
-                {
-                    // 2枚目の画像描画
-                    canvas.drawBitmap(mHaikei, mImageWidth + mX, 0, null);
-                }
-                // 1枚目の画の左が見切れている場合
-                else if ( mX > 0 )
-                {
-                    // 2枚目の画像描画
-                    canvas.drawBitmap(mHaikei, - mImageWidth + mX, 0, null);
-                }
                 // キャラクター描画
                 canvas.drawBitmap(mCharacter.getAnimationBitmap(),mCharacter.getXPos(),mCharacter.getYPos(),null);
 
-                canvas.drawText(mFps,100,200,mPaint);
+                canvas.drawText(fps,100,200,mPaint);
 
                 //LockしたCanvasを解放、ほかの描画処理スレッドがあればそちらに。
                 unlockCanvasAndPost(canvas);
@@ -219,7 +244,7 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
 
     public void setViewSize(int width, int height)
     {
-        mDispWidth = width;
-        mDispHeight = height;
+        mViewWidth = width;
+        mViewHeight = height;
     }
 }
