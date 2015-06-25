@@ -9,11 +9,12 @@
 
     <fragment
         android:id="@+id/map"
-        class="com.google.android.gms.maps.MapFragment"
+        class="wt.walk_tourist.PDF.Map.Map_MapFragment"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"/>
+
 </RelativeLayout>

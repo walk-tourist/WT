@@ -15,16 +15,22 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.RelativeLayout;
 
+import wt.walk_tourist.DDF.Ok.DDF_Ok;
+import wt.walk_tourist.DDF.Wait.DDF_Wait;
+import wt.walk_tourist.DDF.Yes_Or_No.DDF_Yes_Or_No;
 import wt.walk_tourist.MDF.base.MDF_Base;
 import wt.walk_tourist.MDF.game.MDF_Game_Contents;
 import wt.walk_tourist.MDF.help.MDF_Help;
+import wt.walk_tourist.MDF.map.MDF_Map;
 import wt.walk_tourist.MDF.point_management.MDF_PointManagement;
+import wt.walk_tourist.define.Define;
 import wt.walk_tourist.sound.BGM_Player_Service;
 import wt.walk_tourist.MDF.startup.MDF_StartUp;
 import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot;
+import wt.walk_tourist.wt_fragment.WT_DialogDisplayFragment;
 import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
-public class MainActivity extends Activity implements WT_MainDisplayFragment.MainFragmentListener {
+public class MainActivity extends Activity implements WT_MainDisplayFragment.MainFragmentListener, WT_DialogDisplayFragment.DialogFragmentListener {
 
     public enum BUNDLE_KEY{
         BUNDLE_KEY_MDF;
@@ -151,8 +157,7 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
                 MDF_Fragment = new MDF_Game_Contents();
                 break;
             case MDF_MAP:
-                // TODO MAP用の処理が必要 (今はほぼHELP処理のコピペ)
-                MDF_Fragment = new MDF_Help();
+                MDF_Fragment = new MDF_Map();
                 break;
             case MDF_POINT:
                 MDF_Fragment = new MDF_PointManagement();
@@ -166,10 +171,10 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
 
         if (  null != MDF_Fragment ){//&& 0!= bgmResId ) {
             fragmentTransaction.replace(R.id.main_fragment, MDF_Fragment, "mainFragment");
-
             fragmentTransaction.setTransition(transaction);
             fragmentTransaction.commit();
 
+            // openDialog(Define.DIALOG_TYPE.WAIT, FragmentTransaction.TRANSIT_FRAGMENT_FADE);
             setOrientation(MDF_Fragment.getScreenOrientation());
 
             if ( null != myService )
@@ -181,6 +186,34 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
                 mReservationBGMResId = MDF_Fragment.getBGMResId();
             }
         }
+    }
+
+    public void openDialog(Define.DIALOG_TYPE type, int transaction){
+
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        WT_DialogDisplayFragment DDF_Fragment = null;
+
+        switch(type)
+        {
+            case OK:
+                DDF_Fragment  = new DDF_Ok();
+                break;
+            case WAIT:
+                DDF_Fragment   = new DDF_Wait();
+                break;
+            case YES_OR_NO:
+                DDF_Fragment  = new DDF_Yes_Or_No();
+                break;
+            default:
+                break;
+        }
+
+        fragmentTransaction.setTransition(transaction);
+        fragmentTransaction.replace(R.id.ddf_fragment, DDF_Fragment, "DDF_mainFragment");
+
+        fragmentTransaction.commit();
     }
 
     private void setOrientation(int screenOrientation)
@@ -206,20 +239,40 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
         unbindService(serviceConnection);
     }
 
+
+    public void closeDialog(){
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        WT_DialogDisplayFragment dialog = (WT_DialogDisplayFragment) fragmentManager.findFragmentByTag("DDF_mainFragment");
+        if( null != dialog )
+        {
+            fragmentTransaction.remove(dialog);
+        }
+        fragmentTransaction.commit();
+
+
+    }
+
     @Override
     public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
         if(keyCode != KeyEvent.KEYCODE_BACK){
             return super.onKeyDown(keyCode, event);
         }else{
-            if (m_MDF_Name != WT_MainDisplayFragment.MDF_NAME.MDF_BASE)
+            FragmentManager fragmentManager = getFragmentManager();
+            WT_DialogDisplayFragment fragment = (WT_DialogDisplayFragment) fragmentManager.findFragmentByTag("DDF_mainFragment");
+            if( null != fragment )
             {
-                changeMDF(WT_MainDisplayFragment.MDF_NAME.MDF_BASE,FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                fragment.callBackKey();
             }
-            else
-            {
-                // TODO アプリケーション終了確認ダイアログを表示する
-                Log.d("hoge", "huge");
-                stopService(new Intent(getBaseContext(), BGM_Player_Service.class));
+            else {
+
+                if (m_MDF_Name != WT_MainDisplayFragment.MDF_NAME.MDF_BASE) {
+                    changeMDF(WT_MainDisplayFragment.MDF_NAME.MDF_BASE, FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                } else {
+                    // TODO アプリケーション終了確認ダイアログを表示する
+                    Log.d("hoge", "huge");
+                    stopService(new Intent(getBaseContext(), BGM_Player_Service.class));
+                }
             }
             return false;
         }

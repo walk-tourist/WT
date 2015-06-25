@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 import wt.walk_tourist.MainActivity;
 import wt.walk_tourist.R;
+import wt.walk_tourist.define.Define;
 import wt.walk_tourist.sound.SE_SoundPool;
 
 /**
@@ -55,6 +56,8 @@ public abstract class WT_MainDisplayFragment extends WT_Fragment {
     {
         void changeMDF(MDF_NAME name);
         void changeMDF(MDF_NAME name, int transaction);
+        void openDialog(Define.DIALOG_TYPE type, int transaction);
+        void closeDialog();
     }
 
     protected MainFragmentListener mListener;

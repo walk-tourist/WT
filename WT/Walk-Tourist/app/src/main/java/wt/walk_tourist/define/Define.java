@@ -14,4 +14,11 @@ public class Define {
         RIGHT,
         LEFT
     }
+
+    public enum DIALOG_TYPE{
+        WAIT,
+        YES_OR_NO,
+        OK
+    }
+
 }

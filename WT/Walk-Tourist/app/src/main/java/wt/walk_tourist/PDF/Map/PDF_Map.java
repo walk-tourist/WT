@@ -5,32 +5,56 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import wt.walk_tourist.R;
 import wt.walk_tourist.wt_fragment.WT_PartsDisplayFragment;
 
 /**
- * �p�[�c�̃}�b�v�t���O�����g�N���X
- * �Ƃ肠�������C�A�E�g�̓}�b�v���̂�
+ *
  */
 public class PDF_Map extends WT_PartsDisplayFragment {
+    Map_MapFragment mMap;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
 
+        View v = inflater.inflate(R.layout.pdf_map_layout, container, false);
 
-        return inflater.inflate(R.layout.pdf_map_layout, container, false);
+        return v;
+    }
+
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Map_MapFragment map = (Map_MapFragment) getFragmentManager()
+                .findFragmentById(R.id.map);
+        if (map != null)
+            getFragmentManager().beginTransaction().remove(map).commit();
+    }
+
+
+    @Override
+    public void onStart(){
+        super.onStart();
+    }
+
+
+    private void setViewItems(View v) {
+
     }
 
     public void releaseParts()
     {
-  /**      PDF_WalkAnimation_TextureView pdf_walkAnimation_textureView;
+        /**    PDF_Map pdf_map;
 
-        View v = getView();
-        if( null != v ) {
-            pdf_walkAnimation_textureView = (PDF_WalkAnimation_TextureView) v.findViewById(R.id.walk_animation_texture);
-            pdf_walkAnimation_textureView.stopThread();
-        }**/
+         View v = getView();
+         if( null != v ) {
+         pdf_map = (z) v.findViewById(R.id.map);
+         pdf_walkAnimation_textureView.stopThread();
+         }*/
     }
 
 }

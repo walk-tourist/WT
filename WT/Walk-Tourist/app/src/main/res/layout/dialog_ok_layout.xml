@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:background="#77000000"
-    android:clickable="true">
+    android:background="#77000000">
 
     <RelativeLayout
         android:layout_width="250dp"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
         android:background="#FFFFFF">
@@ -22,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="wait・・・"
+                android:text="Medium Text"
                 android:id="@+id/textView3"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentLeft="true"
@@ -31,21 +30,35 @@
                 android:textStyle="bold" />
         </RelativeLayout>
 
-        <RelativeLayout
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="New Text"
+            android:id="@+id/textView4"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/relativeLayout"
+            android:padding="10dp"
+            android:layout_above="@+id/linearLayout" />
+
+        <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_below="@+id/relativeLayout"
-            android:layout_margin="10dp">
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="#6495ED"
+            android:id="@+id/linearLayout">
 
-            <ProgressBar
-                style="?android:attr/progressBarStyleLarge"
+            <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/progressBar"
-                android:layout_centerVertical="true"
-                android:layout_centerHorizontal="true" />
-        </RelativeLayout>
+                android:text="OK"
+                android:id="@+id/button3"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1" />
+
+        </LinearLayout>
 
     </RelativeLayout>
 </RelativeLayout>
