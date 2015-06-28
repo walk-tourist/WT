@@ -26,6 +26,8 @@ public class A_Character extends CreateBitmap{
     private int mChangeCount;
     private int mPosX;
     private int mPosY;
+    private int mSpeedX = 0;
+    private int mSpeedY = 1;
     private int mPattern;
 
     private int mAnimationCount;
@@ -168,12 +170,31 @@ public class A_Character extends CreateBitmap{
 
     public void changeDirection( Define.DIRECTION_DEF direction)
     {
-        mDirection = direction;
+        if ( mDirection == direction )
+        {
+            switch ( mDirection )
+            {
+                case DOWN:
+                case UP:
+                    updateSpeedY(1);
+                    break;
+
+                case LEFT:
+                case RIGHT:
+                    updateSpeedX(1);
+                    break;
+            }
+        }
+        else
+        {
+            setSpeedX(0);
+            setSpeedY(1);
+            mDirection = direction;
+        }
     }
 
     private int getPattern()
     {
-        int r;
         mAnimationCount++;
         if( mChangeCount*(mPattern+(-2+mPattern)) <= mAnimationCount)
         {
@@ -219,14 +240,49 @@ public class A_Character extends CreateBitmap{
         return null;
     }
 
+    public void setSpeedX( int speed )
+    {
+        mSpeedX = speed;
+    }
+
+    public void updateSpeedX( int speed )
+    {
+        mSpeedX = Math.abs( mSpeedX + speed );
+
+        if( 20 < mSpeedX )
+        {
+            mSpeedX = 20;
+        }
+    }
+
+    public void setSpeedY( int speed )
+    {
+        mSpeedY = speed;
+    }
+
+    public void updateSpeedY( int speed )
+    {
+        mSpeedY = Math.abs( mSpeedY + speed );
+
+        if( 0 == mSpeedY )
+        {
+            mSpeedY = 1;
+        }
+
+        if( 20 < mSpeedY )
+        {
+            mSpeedX = 20;
+        }
+    }
+
     public void updatePosX(int x)
     {
-        mPosX = mPosX + x;
+        mPosX = mPosX + ( x * mSpeedX );
     }
 
     public void updatePosY(int y)
     {
-        mPosY = mPosY + y;
+        mPosY = mPosY + ( y * mSpeedY );
     }
 
     public int getXPos()

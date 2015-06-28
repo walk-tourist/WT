@@ -1,7 +1,6 @@
 package wt.walk_tourist.PDF.WalkAnimation_Texture;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -13,7 +12,6 @@ import android.view.TextureView;
 import wt.walk_tourist.R;
 import wt.walk_tourist.animation.A_BackGround;
 import wt.walk_tourist.animation.A_Character;
-import wt.walk_tourist.animation.CreateBitmap;
 import wt.walk_tourist.define.Define;
 
 /**
@@ -30,15 +28,6 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
     private boolean mRunning = false;
     private int mViewWidth;
     private int mViewHeight;
-
-    //   private Bitmap mSky;
-//    private Bitmap mBuilding;
-    //   private int mSkyWidth;
-//    private int mBuildingWidth;
-    //   private int mSkyX;
-    //   private int mSkyY;
-//    private int mBuildingX;
-//    private int mBuildingY;
 
     private long mTime;
 
@@ -70,8 +59,8 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
     @Override
     public void onSurfaceTextureAvailable(SurfaceTexture surface,int width,int height) {
 
-        mSky = new A_BackGround(getResources(), R.drawable.haikei, mViewWidth, mViewHeight, mViewWidth*2, (int)(mViewHeight*0.75f));
-        mBuilding = new A_BackGround(getResources(), R.drawable.haikei, mViewWidth, mViewHeight, mViewWidth*2, (int)(mViewHeight*0.8f));
+        mSky = new A_BackGround(getResources(), R.drawable.haikei2, mViewWidth, mViewHeight, mViewWidth*2, (int)(mViewHeight*0.75f));
+        mBuilding = new A_BackGround(getResources(), R.drawable.machi, mViewWidth, mViewHeight, mViewWidth*2, (int)(mViewHeight*0.8f));
 
         mDirection = Define.DIRECTION_DEF.RIGHT;
         mCharacter = new A_Character(getResources().openRawResource(R.raw.c01_32),32,(int)(mViewWidth*0.2f),(int)(mViewHeight*0.15f),mViewWidth/2,(int)(mViewHeight*0.7f),3,mDirection);
@@ -111,11 +100,13 @@ public class WalkAnimation_TextureView extends TextureView implements TextureVie
             case LEFT:
                 mSky.addPosX(mAnimationCount);
                 mBuilding.addPosX(mAnimationCount*3);
+                mCharacter.updatePosX(-mAnimationCount);
                 break;
 
             case RIGHT:
                 mSky.addPosX(-mAnimationCount);
                 mBuilding.addPosX(-mAnimationCount*3);
+                mCharacter.updatePosX(mAnimationCount);
                 break;
 
             case UP:
