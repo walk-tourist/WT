@@ -23,6 +23,9 @@ import wt.walk_tourist.MDF.game.MDF_Game_Contents;
 import wt.walk_tourist.MDF.help.MDF_Help;
 import wt.walk_tourist.MDF.map.MDF_Map;
 import wt.walk_tourist.MDF.point_management.MDF_PointManagement;
+import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot_ForBor;
+import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot_ForPref;
+import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot_ForSpot;
 import wt.walk_tourist.define.Define;
 import wt.walk_tourist.sound.BGM_Player_Service;
 import wt.walk_tourist.MDF.startup.MDF_StartUp;
@@ -150,8 +153,14 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
             case MDF_BASE:
                 MDF_Fragment = new MDF_Base();
                 break;
-            case MDF_SPOT:
-                MDF_Fragment = new MDF_TouristSpot();
+            case MDF_SPOT_FOR_PREF:
+                MDF_Fragment = new MDF_TouristSpot_ForPref();
+                break;
+            case MDF_SPOT_FOR_BOR:
+                MDF_Fragment = new MDF_TouristSpot_ForBor();
+                break;
+            case MDF_SPOT_FOR_SPOT:
+                MDF_Fragment = new MDF_TouristSpot_ForSpot();
                 break;
             case MDF_GAME:
                 MDF_Fragment = new MDF_Game_Contents();

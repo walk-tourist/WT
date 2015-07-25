@@ -115,29 +115,13 @@ public class MDF_TouristSpot_ForPref extends MDF_TouristSpot {
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.tourist_spot_back_button) {
-            // TODO この画面を閉じる
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            // 1つ前のフラグメントを取り出す
-            fragmentManager.popBackStack();
-            fragmentTransaction.commit();
+            // この画面を閉じる
+            mListener.changeMDF(MDF_NAME.MDF_BASE, FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
 
         } else if (view.getId() == R.id.listView1) {
             // TODO FragmentからFragmentへの値の渡し方はどのようにすればよいか
             SettingsUtilty.outputOperationLog("観光地を選択しました。");
-
-            FragmentManager fragmentManager = getFragmentManager();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-
-            MDF_TouristSpot_ForBor touristSpotForBorFragment = new MDF_TouristSpot_ForBor();
-
-            fragmentTransaction.add(R.id.main_fragment, touristSpotForBorFragment, "touristSpotForBorFragment");
-            fragmentTransaction.addToBackStack(null);
-
-            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-
-            fragmentTransaction.commit();
+            mListener.changeMDF(MDF_NAME.MDF_SPOT_FOR_BOR, FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         }
     }
 }

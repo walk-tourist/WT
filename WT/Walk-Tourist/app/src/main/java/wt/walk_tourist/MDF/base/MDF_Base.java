@@ -72,7 +72,7 @@ public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickList
         switch (view.getId()) {
             case R.id.button_tourist_spot:
                 mSoundPool.defPlay(mSoundId);
-                mListener.changeMDF(MDF_NAME.MDF_SPOT, FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+                mListener.changeMDF(MDF_NAME.MDF_SPOT_FOR_PREF, FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
                 break;
             case R.id.button_start_game:
                 mSoundPool.defPlay(mSoundId);

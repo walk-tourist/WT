@@ -41,6 +41,8 @@ public class MDF_Game_Contents extends WT_MainDisplayFragment implements View.On
         // バックボタンのリスナーをセットする
         v.findViewById(R.id.game_contents_back_button).setOnClickListener(this);
 
+        showList(v);
+
     }
 
     private void showList(View v) {
