@@ -22,6 +22,7 @@ import wt.walk_tourist.MDF.base.MDF_Base;
 import wt.walk_tourist.MDF.game.MDF_Game_Contents;
 import wt.walk_tourist.MDF.help.MDF_Help;
 import wt.walk_tourist.MDF.map.MDF_Map;
+import wt.walk_tourist.MDF.point_management.MDF_ItemSelect;
 import wt.walk_tourist.MDF.point_management.MDF_PointManagement;
 import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot_ForBor;
 import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot_ForPref;
@@ -169,7 +170,7 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
                 MDF_Fragment = new MDF_Map();
                 break;
             case MDF_POINT:
-                MDF_Fragment = new MDF_PointManagement();
+                MDF_Fragment = new MDF_ItemSelect();
                 break;
             case MDF_HELP:
                 MDF_Fragment = new MDF_Help();

@@ -32,9 +32,12 @@
     <string name="game_contents_list_title">ゲームList</string>
     <!-- // game -->
 
-    <!-- game -->
+    <!-- point_management -->
     <string name="point_management_back_button_home">HOME</string>
     <string name="point_management_title">ポイント管理</string>
-    <!-- // game -->
+    <string name="shop">アイテム購入</string>
+    <string name="shop_back_button_home">HOME</string>
+    <string name="hand_point">現在のポイント</string>
+    <!-- // point_management -->
 
 </resources>

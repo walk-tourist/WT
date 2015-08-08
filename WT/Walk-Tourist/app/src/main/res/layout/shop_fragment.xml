@@ -1,0 +1,86 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/shop_fragment_layout">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="@dimen/shop_horizontal_padding"
+        android:paddingRight="@dimen/shop_horizontal_padding"
+        android:paddingTop="@dimen/shop_vertical_padding"
+        android:paddingBottom="@dimen/shop_vertical_padding"
+        android:background="#EEEEEE"
+        android:orientation="vertical"
+        android:id="@+id/shop_fragment_main_layout"
+        android:visibility="visible" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <!-- title -->
+            <TextView
+                android:id="@+id/shop_back_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="10dp"
+                android:text="@string/shop"/>
+            <!-- // title -->
+            <!-- home_button -->
+            <Button
+                android:id="@+id/shop_back_button"
+                android:layout_alignBaseline="@+id/shop_back_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/shop_back_button_home"
+                android:textSize="25dp"
+                android:background="#FFFFFF"
+                android:layout_alignParentRight="true" />
+            <!-- // home_button -->
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal">
+        <!-- hand_point_label -->
+            <TextView
+                android:id="@+id/hand_point_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:layout_marginLeft="20dp"
+                android:text="@string/hand_point"/>
+            <!-- // hand_point_label -->
+            <!-- hand_point -->
+            <TextView
+                android:id="@+id/hand_point"
+                android:layout_toRightOf="@+id/hand_point_label"
+                android:layout_alignBaseline="@+id/hand_point_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textSize="20dp"
+                android:textColor="#FF0000"
+                android:text="1500pt"/>
+            <!-- // hand_point -->
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/item_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:paddingLeft="10dp">
+        </ListView>
+
+    </LinearLayout>
+
+</RelativeLayout>

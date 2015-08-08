@@ -19,7 +19,7 @@ import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 public class MDF_Game_Contents extends WT_MainDisplayFragment implements View.OnClickListener {
 
     // 選択したゲームコンテンツ
-    private int selectedSpotNo;
+    private int selectedContentsNo;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,8 +67,8 @@ public class MDF_Game_Contents extends WT_MainDisplayFragment implements View.On
                 // クリックしたリストの情報を格納 リクエスト送信用
                 ListView listView = (ListView) parent;
 
-                // タップした観光地IDをセットする
-                selectedSpotNo = ((D_Game_Contents) listView.getItemAtPosition(position)).getContentsId();
+                // タップしたゲームIDをセットする
+                selectedContentsNo = ((D_Game_Contents) listView.getItemAtPosition(position)).getContentsId();
 
                 // 動作確認ダイアログを表示
                 Toast.makeText(getActivity(), ((D_Game_Contents) listView.getItemAtPosition(position)).getContentsName(), Toast.LENGTH_SHORT).show();

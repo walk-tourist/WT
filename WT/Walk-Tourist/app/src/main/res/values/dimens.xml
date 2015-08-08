@@ -4,13 +4,19 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <!-- tourist_spot -->
-    <dimen name="tourist_spot_horizontal_margin">16dp</dimen>
-    <dimen name="tourist_spot_vertical_margin">16dp</dimen>
+    <dimen name="tourist_spot_horizontal_padding">16dp</dimen>
+    <dimen name="tourist_spot_vertical_padding">16dp</dimen>
     <!-- // tourist_spot -->
 
     <!-- game_contents -->
-    <dimen name="game_contents_horizontal_margin">16dp</dimen>
-    <dimen name="game_contents_vertical_margin">16dp</dimen>
+    <dimen name="game_contents_horizontal_padding">16dp</dimen>
+    <dimen name="game_contents_vertical_padding">16dp</dimen>
     <!-- // game_contents -->
+
+    <!-- shop -->
+    <dimen name="shop_horizontal_padding">0dp</dimen>
+    <dimen name="shop_vertical_padding">0dp</dimen>
+    <!-- // shop -->
+
 
 </resources>
