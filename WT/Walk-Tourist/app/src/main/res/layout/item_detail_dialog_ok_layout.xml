@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/item_detail_dialog_ok_layout"
+    android:background="#77000000"
+    android:padding="50dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:background="#FFFFFF">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:id="@+id/relativeLayout">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="高画質カメラ"
+                android:id="@+id/textView3"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:padding="10dp"
+                android:background="#ED6495"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/list_item_image"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/relativeLayout"
+            android:layout_above="@+id/linearLayout"
+            android:padding="10dp"
+            android:src="@drawable/camera"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="高画質カメラで撮影ができるようになります。\n毛穴に詰まった汚れまでしっかり撮れます！！！\nその他、撮影写真の投稿機能、撮影ポイント参照機能が有効になります。"
+            android:id="@+id/textView4"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/relativeLayout"
+            android:padding="10dp"
+            android:layout_above="@+id/linearLayout" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/linearLayout"
+            android:layout_alignParentLeft="true"
+            android:padding="5dp"
+            android:background="#ED6495">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="購入する"
+                android:background="#e3e3e3"
+                android:id="@+id/buy_button"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:padding="5dp"
+            android:background="#ED6495"
+            android:id="@+id/linearLayout">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#e3e3e3"
+                android:text="閉じる"
+                android:id="@+id/OK_button"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

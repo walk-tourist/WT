@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import wt.walk_tourist.R;
+import wt.walk_tourist.define.Define;
 import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
 public class MDF_ItemSelect extends WT_MainDisplayFragment implements View.OnClickListener {
@@ -87,7 +88,8 @@ public class MDF_ItemSelect extends WT_MainDisplayFragment implements View.OnCli
 
         } else if (view.getId() == R.id.item_list) {
             // TODO FragmentからFragmentへの値の渡し方はどのようにすればよいか
-            // TODO コンテンツ画面へ遷移するようにする
+            // TODO アイテム詳細画面へ遷移するようにする
+            mListener.openDialog(Define.DIALOG_TYPE.OK_ITEM_DETAIL, FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         }
     }
 }
