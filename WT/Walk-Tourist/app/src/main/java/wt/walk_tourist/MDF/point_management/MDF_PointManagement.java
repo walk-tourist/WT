@@ -39,4 +39,10 @@ public class MDF_PointManagement extends WT_MainDisplayFragment implements View.
 
         }
     }
+
+    @Override
+    public int getBGMResId()
+    {
+        return R.raw.bgm03;
+    }
 }

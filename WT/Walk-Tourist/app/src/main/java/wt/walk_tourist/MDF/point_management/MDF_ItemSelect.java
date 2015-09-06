@@ -21,6 +21,9 @@ public class MDF_ItemSelect extends WT_MainDisplayFragment implements View.OnCli
     // 選択したアイテム
     private int selectedItemNo;
 
+    // SoundPool用ID
+   //  private int mSoundId;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
@@ -28,6 +31,9 @@ public class MDF_ItemSelect extends WT_MainDisplayFragment implements View.OnCli
 
 
         setViewItems(v);
+
+        //mSoundId = mSoundPool.load(getActivity().getBaseContext(), R.raw.bgm03,1);
+       // mSoundPool.defPlay(mSoundId);
 
         return v;
     }
@@ -53,8 +59,8 @@ public class MDF_ItemSelect extends WT_MainDisplayFragment implements View.OnCli
         itemDatas.add(new D_Item("コミュニケート", "登録したプレーヤーの居場所がわかります。", 100,  R.drawable.item_communicate));
         itemDatas.add(new D_Item("恵方巻き", "恵方巻きを食べる向きをおしらせいたします。", 5,  R.drawable.item_ehomaki));
         itemDatas.add(new D_Item("メモ", "旅行する旅程をメモして管理しませんか？", 5,  R.drawable.item_memo));
-        itemDatas.add(new D_Item("ガチャ", "何かのアイテムを手に入れることができます。", 50,  R.drawable.item_gacya));
-        itemDatas.add(new D_Item("ハンマー", "近くにいるプレイヤーを無作為に撲殺します。傷害罪で起訴される可能性がございます。", 5,  R.drawable.item_hummer));
+        itemDatas.add(new D_Item("ガチャ", "何かのアイテムを手に入れることができます。", 50, R.drawable.item_gacya));
+        itemDatas.add(new D_Item("ハンマー", "近くにいるプレイヤーを無作為に撲殺します。傷害罪で起訴される可能性がございます。", 5, R.drawable.item_hummer));
 
         LA_Item itemListAdapter = new LA_Item(getActivity(), R.layout.shop_list_item, itemDatas);
 
@@ -91,5 +97,11 @@ public class MDF_ItemSelect extends WT_MainDisplayFragment implements View.OnCli
             // TODO アイテム詳細画面へ遷移するようにする
             mListener.openDialog(Define.DIALOG_TYPE.OK_ITEM_DETAIL, FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         }
+    }
+
+    @Override
+    public int getBGMResId()
+    {
+        return R.raw.bgm03;
     }
 }
