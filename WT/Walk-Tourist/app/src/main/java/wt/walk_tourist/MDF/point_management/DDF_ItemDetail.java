@@ -1,19 +1,13 @@
 package wt.walk_tourist.MDF.point_management;
 
-import android.app.Activity;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import wt.walk_tourist.DDF.Ok.DDF_Ok;
-import wt.walk_tourist.MDF.tourist_spot.D_TouristSpot;
 import wt.walk_tourist.R;
-import wt.walk_tourist.define.Define;
-import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
 /**
  * Created by User on 2015/08/08.

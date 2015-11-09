@@ -1,16 +1,13 @@
-package wt.walk_tourist.wt_fragment;
+package com.example.user.commonfragmentlib;
 
 import android.app.Activity;
-
-import wt.walk_tourist.MainActivity;
-import wt.walk_tourist.define.Define;
 
 /**
  * Created by Akira on 2015/05/25.
  * アプリのダイアログFragmentを管理するクラス
  */
-public abstract class WT_DialogDisplayFragment extends WT_Fragment {
-    public WT_DialogDisplayFragment() {}
+public abstract class DialogDisplayFragment extends CommonFragment {
+    public DialogDisplayFragment() {}
 
     public interface DialogFragmentListener
     {
@@ -27,8 +24,14 @@ public abstract class WT_DialogDisplayFragment extends WT_Fragment {
 
     }
 
-
     public void callBackKey(){
         return;
+    }
+
+    public enum DIALOG_TYPE{
+        WAIT,
+        YES_OR_NO,
+        OK,
+        OK_ITEM_DETAIL
     }
 }

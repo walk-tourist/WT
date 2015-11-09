@@ -1,3 +1,5 @@
+package com.example.user.commonfragmentlib;
+
 /*
     WT_FragmentManager
     ├ WT_MainDisplayFragment
@@ -19,8 +21,6 @@
        ├ WT_DDF_Connected
        └ WT_DDF_Error
  */
-package wt.walk_tourist.wt_fragment;
-
 
 import android.app.Fragment;
 
@@ -28,12 +28,12 @@ import android.app.Fragment;
  * Created by Akira on 2015/05/24.
  * アプリ内で使用するFragmentを管理するクラス
  */
-public class WT_Fragment extends Fragment {
+public abstract class CommonFragment extends Fragment {
 
     protected int m_LayoutWidth;
     protected int m_LayoutHeight;
 
-    public WT_Fragment() {}
+    public CommonFragment() {}
 
     public int getLayoutWidth()
     {

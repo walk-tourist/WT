@@ -1,4 +1,4 @@
-package wt.walk_tourist.sound;
+package com.example.user.commonfragmentlib.sound;
 
 import android.media.SoundPool;
 

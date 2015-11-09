@@ -6,13 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.user.commonfragmentlib.MainDisplayFragment;
+import com.example.user.commonfragmentlib.PartsDisplayFragment;
+
 import wt.walk_tourist.R;
 import wt.walk_tourist.define.Define;
 import wt.walk_tourist.PDF.WalkAnimation_Texture.PDF_WalkAnimation_Texture;
-import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
-import wt.walk_tourist.wt_fragment.WT_PartsDisplayFragment;
 
-public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickListener {
+public class MDF_Base extends MainDisplayFragment implements View.OnClickListener {
 
     // SoundPool用ID
     private int mSoundId;
@@ -33,10 +34,10 @@ public class MDF_Base extends WT_MainDisplayFragment implements View.OnClickList
 
         mSoundId = mSoundPool.load(getActivity().getBaseContext(),R.raw.system49,1);
 
-        WT_PartsDisplayFragment walkAnimation_Texture = new PDF_WalkAnimation_Texture();
+        PartsDisplayFragment walkAnimation_Texture = new PDF_WalkAnimation_Texture();
         Bundle args = new Bundle();
-        args.putInt(WT_PartsDisplayFragment.BUNDLE_KEY.BUNDLE_KEY_WIDTH.getKey(), m_LayoutWidth);
-        args.putInt(WT_PartsDisplayFragment.BUNDLE_KEY.BUNDLE_KEY_HEIGHT.getKey(), m_LayoutHeight);
+        args.putInt(PartsDisplayFragment.BUNDLE_KEY.BUNDLE_KEY_WIDTH.getKey(), m_LayoutWidth);
+        args.putInt(PartsDisplayFragment.BUNDLE_KEY.BUNDLE_KEY_HEIGHT.getKey(), m_LayoutHeight);
 
         walkAnimation_Texture.setArguments(args);
         addPartsDisplayFragment(R.id.base_texture_fragment, walkAnimation_Texture, "base_texture_fragment");

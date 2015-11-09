@@ -9,14 +9,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.user.commonfragmentlib.DialogDisplayFragment;
+import com.example.user.commonfragmentlib.MainDisplayFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import wt.walk_tourist.R;
-import wt.walk_tourist.define.Define;
-import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
-public class MDF_ItemSelect extends WT_MainDisplayFragment implements View.OnClickListener {
+public class MDF_ItemSelect extends MainDisplayFragment implements View.OnClickListener {
 
     // 選択したアイテム
     private int selectedItemNo;
@@ -95,7 +96,7 @@ public class MDF_ItemSelect extends WT_MainDisplayFragment implements View.OnCli
         } else if (view.getId() == R.id.item_list) {
             // TODO FragmentからFragmentへの値の渡し方はどのようにすればよいか
             // TODO アイテム詳細画面へ遷移するようにする
-            mListener.openDialog(Define.DIALOG_TYPE.OK_ITEM_DETAIL, FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+            mListener.openDialog(DialogDisplayFragment.DIALOG_TYPE.OK_ITEM_DETAIL, FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         }
     }
 

@@ -9,14 +9,15 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.user.commonfragmentlib.MainDisplayFragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
 
 import wt.walk_tourist.R;
-import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
-public class MDF_Game_Contents extends WT_MainDisplayFragment implements View.OnClickListener {
+public class MDF_Game_Contents extends MainDisplayFragment implements View.OnClickListener {
 
     // 選択したゲームコンテンツ
     private int selectedContentsNo;
@@ -89,5 +90,11 @@ public class MDF_Game_Contents extends WT_MainDisplayFragment implements View.On
             // TODO FragmentからFragmentへの値の渡し方はどのようにすればよいか
             // TODO コンテンツ画面へ遷移するようにする
         }
+    }
+
+
+    public int getBGMResId()
+    {
+        return R.raw.bgm02;
     }
 }

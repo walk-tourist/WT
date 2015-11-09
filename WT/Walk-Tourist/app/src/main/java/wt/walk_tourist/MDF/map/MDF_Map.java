@@ -4,18 +4,16 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+
+import com.example.user.commonfragmentlib.MainDisplayFragment;
 
 import wt.walk_tourist.PDF.Map.PDF_Map;
-import wt.walk_tourist.PDF.WalkAnimation_Texture.PDF_WalkAnimation_Texture;
 import wt.walk_tourist.R;
-import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
-import wt.walk_tourist.wt_fragment.WT_PartsDisplayFragment;
 
 /**
- * PDF_Map���g�p����N���X
+ * PDF_Map
  */
-public class MDF_Map extends WT_MainDisplayFragment {
+public class MDF_Map extends MainDisplayFragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -38,6 +36,12 @@ public class MDF_Map extends WT_MainDisplayFragment {
         p_map.setArguments(args);
         addPartsDisplayFragment(R.id.mdf_map_area, p_map, "mdf_map_area");
 
+    }
+
+
+    public int getBGMResId()
+    {
+        return R.raw.bgm02;
     }
 
 }

@@ -1,19 +1,20 @@
 package wt.walk_tourist;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ServiceConnection;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.os.IBinder;
 import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.RelativeLayout;
+
+import com.example.user.commonfragmentlib.CommonActivity;
+import com.example.user.commonfragmentlib.DialogDisplayFragment;
+import com.example.user.commonfragmentlib.MainDisplayFragment;
+import com.example.user.commonfragmentlib.sound.BGM_Player_Service;
 
 import wt.walk_tourist.DDF.Ok.DDF_Ok;
 import wt.walk_tourist.DDF.Wait.DDF_Wait;
@@ -24,54 +25,12 @@ import wt.walk_tourist.MDF.help.MDF_Help;
 import wt.walk_tourist.MDF.map.MDF_Map;
 import wt.walk_tourist.MDF.point_management.DDF_ItemDetail;
 import wt.walk_tourist.MDF.point_management.MDF_ItemSelect;
-import wt.walk_tourist.MDF.point_management.MDF_PointManagement;
 import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot_ForBor;
 import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot_ForPref;
 import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot_ForSpot;
-import wt.walk_tourist.define.Define;
-import wt.walk_tourist.sound.BGM_Player_Service;
 import wt.walk_tourist.MDF.startup.MDF_StartUp;
-import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot;
-import wt.walk_tourist.wt_fragment.WT_DialogDisplayFragment;
-import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
-public class MainActivity extends Activity implements WT_MainDisplayFragment.MainFragmentListener, WT_DialogDisplayFragment.DialogFragmentListener {
-
-    public enum BUNDLE_KEY{
-        BUNDLE_KEY_MDF;
-
-        public String getKey(){
-            return name();
-        }
-    }
-
-    public int m_LayoutWidth;
-    public int m_LayoutHeight;
-
-    protected WT_MainDisplayFragment.MDF_NAME m_MDF_Name;
-    protected int mReservationBGMResId = 0;
-    protected Intent serviceIntent;
-    BGM_Player_Service myService;
-    ServiceConnection serviceConnection = new ServiceConnection(){
-        @Override public void onServiceConnected(ComponentName name, IBinder service) {
-            myService = ((BGM_Player_Service.MyBinder)service).getService();
-            if( 0 != mReservationBGMResId)
-            {
-                myService.startBGM(mReservationBGMResId);
-                mReservationBGMResId = 0;
-            }
-        }
-        @Override public void onServiceDisconnected(ComponentName name) {
-            myService = null;
-        }
-    };
-
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle outState )
-    {
-        super.onSaveInstanceState(outState);
-        outState.putString(BUNDLE_KEY.BUNDLE_KEY_MDF.getKey(), m_MDF_Name.name());
-    }
+public class MainActivity extends CommonActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,11 +39,11 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
 
         if (  null != savedInstanceState && null != savedInstanceState.getString(BUNDLE_KEY.BUNDLE_KEY_MDF.getKey()) )
         {
-            m_MDF_Name = WT_MainDisplayFragment.MDF_NAME.valueOf(savedInstanceState.getString(BUNDLE_KEY.BUNDLE_KEY_MDF.getKey()));
+            m_MDF_Name = MainDisplayFragment.MDF_NAME.valueOf(savedInstanceState.getString(BUNDLE_KEY.BUNDLE_KEY_MDF.getKey()));
         }
         else
         {
-            m_MDF_Name = WT_MainDisplayFragment.MDF_NAME.MDF_START;
+            m_MDF_Name = MainDisplayFragment.MDF_NAME.MDF_START;
         }
 
         serviceIntent = new Intent( getBaseContext(), BGM_Player_Service.class);
@@ -123,19 +82,19 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
     private void removePDF(FragmentManager fragmentManager)
     {
         // PDF_Remove処理
-        WT_MainDisplayFragment oldMainDisplayFragment =  (WT_MainDisplayFragment)fragmentManager.findFragmentByTag("mainFragment");
+        MainDisplayFragment oldMainDisplayFragment =  (MainDisplayFragment)fragmentManager.findFragmentByTag("mainFragment");
         if( null != oldMainDisplayFragment)
         {
             oldMainDisplayFragment.removeChildFragment();
         }
     }
 
-    public void changeMDF(WT_MainDisplayFragment.MDF_NAME name)
+    public void changeMDF(MainDisplayFragment.MDF_NAME name)
     {
         changeMDF(name, FragmentTransaction.TRANSIT_NONE);
     }
 
-    public void changeMDF(WT_MainDisplayFragment.MDF_NAME name, int transaction)
+    public void changeMDF(MainDisplayFragment.MDF_NAME name, int transaction)
     {
         m_MDF_Name = name;
 
@@ -145,7 +104,7 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
 
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        WT_MainDisplayFragment MDF_Fragment = null;
+        MainDisplayFragment MDF_Fragment = null;
 
         switch(m_MDF_Name)
         {
@@ -199,12 +158,12 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
         }
     }
 
-    public void openDialog(Define.DIALOG_TYPE type, int transaction){
+    public void openDialog(DialogDisplayFragment.DIALOG_TYPE type, int transaction){
 
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        WT_DialogDisplayFragment DDF_Fragment = null;
+        DialogDisplayFragment DDF_Fragment = null;
 
         switch(type)
         {
@@ -257,7 +216,7 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
     public void closeDialog(){
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        WT_DialogDisplayFragment dialog = (WT_DialogDisplayFragment) fragmentManager.findFragmentByTag("DDF_mainFragment");
+        DialogDisplayFragment dialog = (DialogDisplayFragment) fragmentManager.findFragmentByTag("DDF_mainFragment");
         if( null != dialog )
         {
             fragmentTransaction.remove(dialog);
@@ -273,15 +232,15 @@ public class MainActivity extends Activity implements WT_MainDisplayFragment.Mai
             return super.onKeyDown(keyCode, event);
         }else{
             FragmentManager fragmentManager = getFragmentManager();
-            WT_DialogDisplayFragment fragment = (WT_DialogDisplayFragment) fragmentManager.findFragmentByTag("DDF_mainFragment");
+            DialogDisplayFragment fragment = (DialogDisplayFragment) fragmentManager.findFragmentByTag("DDF_mainFragment");
             if( null != fragment )
             {
                 fragment.callBackKey();
             }
             else {
 
-                if (m_MDF_Name != WT_MainDisplayFragment.MDF_NAME.MDF_BASE) {
-                    changeMDF(WT_MainDisplayFragment.MDF_NAME.MDF_BASE, FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                if (m_MDF_Name != MainDisplayFragment.MDF_NAME.MDF_BASE) {
+                    changeMDF(MainDisplayFragment.MDF_NAME.MDF_BASE, FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                 } else {
                     // TODO アプリケーション終了確認ダイアログを表示する
                     Log.d("hoge", "huge");

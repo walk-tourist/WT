@@ -5,15 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
+
+import com.example.user.commonfragmentlib.PartsDisplayFragment;
 
 import wt.walk_tourist.R;
-import wt.walk_tourist.wt_fragment.WT_PartsDisplayFragment;
 
 /**
  *
  */
-public class PDF_Map extends WT_PartsDisplayFragment {
+public class PDF_Map extends PartsDisplayFragment {
     Map_MapFragment mMap;
 
     @Override

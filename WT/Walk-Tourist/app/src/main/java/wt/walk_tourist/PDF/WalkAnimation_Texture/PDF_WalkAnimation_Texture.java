@@ -5,15 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.user.commonfragmentlib.PartsDisplayFragment;
+
 import wt.walk_tourist.R;
 import wt.walk_tourist.define.Define;
-import wt.walk_tourist.wt_fragment.WT_PartsDisplayFragment;
 
 /**
  * Created by taguchi on 2015/06/08.
  * 背景が流れるViewのパーツ
  */
-public class PDF_WalkAnimation_Texture extends WT_PartsDisplayFragment {
+public class PDF_WalkAnimation_Texture extends PartsDisplayFragment {
 
     WalkAnimation_TextureView m_WalkAnimation_TextureView;
 

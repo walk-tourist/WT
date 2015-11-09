@@ -1,4 +1,4 @@
-package wt.walk_tourist.wt_fragment;
+package com.example.user.commonfragmentlib;
 
 import android.app.Activity;
 import android.app.FragmentManager;
@@ -9,25 +9,22 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 
-import java.util.ArrayList;
+import com.example.user.commonfragmentlib.sound.SE_SoundPool;
 
-import wt.walk_tourist.MainActivity;
-import wt.walk_tourist.R;
-import wt.walk_tourist.define.Define;
-import wt.walk_tourist.sound.SE_SoundPool;
+import java.util.ArrayList;
 
 /**
  * Created by Akira on 2015/05/25.
  * アプリのMainActivityで使用するFragmentを管理するクラス
  */
-public abstract class WT_MainDisplayFragment extends WT_Fragment {
+public abstract class MainDisplayFragment extends CommonFragment {
 
     // 子Fragment
-    protected ArrayList<WT_PartsDisplayFragment> m_PartsDisplayFragmentList = new ArrayList<WT_PartsDisplayFragment>();
+    protected ArrayList<PartsDisplayFragment> m_PartsDisplayFragmentList = new ArrayList<PartsDisplayFragment>();
 
-    protected SE_SoundPool mSoundPool;
+    public SE_SoundPool mSoundPool;
 
-    public WT_MainDisplayFragment() {
+    public MainDisplayFragment() {
 
         if ( Build.VERSION.SDK_INT >= 21 ) {
             // SoundPoolはAPI21以降、インスタンスをBuilderから取得する。
@@ -58,7 +55,7 @@ public abstract class WT_MainDisplayFragment extends WT_Fragment {
     {
         void changeMDF(MDF_NAME name);
         void changeMDF(MDF_NAME name, int transaction);
-        void openDialog(Define.DIALOG_TYPE type, int transaction);
+        void openDialog(DialogDisplayFragment.DIALOG_TYPE type, int transaction);
         void closeDialog();
     }
 
@@ -68,10 +65,10 @@ public abstract class WT_MainDisplayFragment extends WT_Fragment {
     public void onAttach(Activity activity)
     {
         super.onAttach(activity);
-        mListener = (MainFragmentListener)activity;
-        MainActivity main = (MainActivity)activity;
-        m_LayoutHeight = main.m_LayoutHeight;
-        m_LayoutWidth = main.m_LayoutWidth;
+        mListener = (CommonActivity)activity;
+
+        m_LayoutHeight = ((CommonActivity)activity).m_LayoutHeight;
+        m_LayoutWidth = ((CommonActivity)activity).m_LayoutWidth;
 
     }
 
@@ -83,7 +80,7 @@ public abstract class WT_MainDisplayFragment extends WT_Fragment {
         mSoundPool.release();
     }
 
-    public void addPartsDisplayFragment(int containerViewId, WT_PartsDisplayFragment partsDisplayFragment, String tag )
+    public void addPartsDisplayFragment(int containerViewId, PartsDisplayFragment partsDisplayFragment, String tag )
     {
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -96,10 +93,10 @@ public abstract class WT_MainDisplayFragment extends WT_Fragment {
         m_PartsDisplayFragmentList.add(partsDisplayFragment);
     }
 
-    public WT_PartsDisplayFragment getPartsDisplayFragment(String tag)
+    public PartsDisplayFragment getPartsDisplayFragment(String tag)
     {
         for (int i = 0 ; i < m_PartsDisplayFragmentList.size() ; i++){
-            WT_PartsDisplayFragment pdf = m_PartsDisplayFragmentList.get(i);
+            PartsDisplayFragment pdf = m_PartsDisplayFragmentList.get(i);
             if ( pdf.getTag() == tag )
             {
                 return pdf;
@@ -116,11 +113,11 @@ public abstract class WT_MainDisplayFragment extends WT_Fragment {
     }
 
     // 画面での再生曲を取得する
-    //public abstract int getBGMResId();
-    public int getBGMResId()
-    {
-        return R.raw.bgm02;
-    }
+    public abstract int getBGMResId();
+    //public int getBGMResId()
+    //{
+    //    return R.raw.bgm02;
+    //}
 
     // 本フラグメント(MDF)破棄時に破棄する必要がある子フラグメント(PDF)を破棄する
     public void removeChildFragment()
@@ -130,7 +127,7 @@ public abstract class WT_MainDisplayFragment extends WT_Fragment {
 
         // PDF_Remove処理
         for (int i = 0 ; i < m_PartsDisplayFragmentList.size() ; i++){
-            WT_PartsDisplayFragment pdf = m_PartsDisplayFragmentList.get(i);
+            PartsDisplayFragment pdf = m_PartsDisplayFragmentList.get(i);
             pdf.releaseParts();
             fragmentTransaction.remove(pdf);
         }

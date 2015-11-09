@@ -5,11 +5,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.user.commonfragmentlib.MainDisplayFragment;
+
 import wt.walk_tourist.R;
-import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
 
-public class MDF_TouristSpot extends WT_MainDisplayFragment implements View.OnClickListener {
+public class MDF_TouristSpot extends MainDisplayFragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,4 +48,8 @@ public class MDF_TouristSpot extends WT_MainDisplayFragment implements View.OnCl
         // TODO 継承先で実装
     }
 
+    public int getBGMResId()
+    {
+        return R.raw.bgm02;
+    }
 }

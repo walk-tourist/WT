@@ -6,13 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.user.commonfragmentlib.MainDisplayFragment;
+
 import wt.walk_tourist.R;
-import wt.walk_tourist.wt_fragment.WT_MainDisplayFragment;
 
 /**
  * Created by taguchi on 2015/06/16.
  */
-public class MDF_StartUp extends WT_MainDisplayFragment implements Runnable{
+public class MDF_StartUp extends MainDisplayFragment implements Runnable{
 
     private Thread mLoop;
 
