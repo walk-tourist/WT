@@ -38,34 +38,10 @@ public abstract class MainDisplayFragment extends CommonFragment {
         }
     }
 
-    public enum MDF_NAME{
-        MDF_START,
-        MDF_BASE,
-        MDF_GAME,
-        MDF_SPOT_FOR_SPOT,
-        MDF_SPOT_FOR_PREF,
-        MDF_SPOT_FOR_BOR,
-        MDF_MAP,
-        MDF_HELP,
-        MDF_POINT,
-        MDF_DFF
-    }
-
-    public interface MainFragmentListener
-    {
-        void changeMDF(MDF_NAME name);
-        void changeMDF(MDF_NAME name, int transaction);
-        void openDialog(DialogDisplayFragment.DIALOG_TYPE type, int transaction);
-        void closeDialog();
-    }
-
-    protected MainFragmentListener mListener;
-
     @Override
     public void onAttach(Activity activity)
     {
         super.onAttach(activity);
-        mListener = (CommonActivity)activity;
 
         m_LayoutHeight = ((CommonActivity)activity).m_LayoutHeight;
         m_LayoutWidth = ((CommonActivity)activity).m_LayoutWidth;

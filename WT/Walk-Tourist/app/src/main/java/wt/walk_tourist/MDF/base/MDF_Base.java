@@ -6,14 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.user.commonfragmentlib.MainDisplayFragment;
 import com.example.user.commonfragmentlib.PartsDisplayFragment;
 
+import wt.walk_tourist.MDF.WTMainDisplayFragment;
 import wt.walk_tourist.R;
 import wt.walk_tourist.define.Define;
 import wt.walk_tourist.PDF.WalkAnimation_Texture.PDF_WalkAnimation_Texture;
 
-public class MDF_Base extends MainDisplayFragment implements View.OnClickListener {
+public class MDF_Base extends WTMainDisplayFragment implements View.OnClickListener {
 
     // SoundPool用ID
     private int mSoundId;

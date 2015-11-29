@@ -15,9 +15,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+import wt.walk_tourist.MDF.WTMainDisplayFragment;
 import wt.walk_tourist.R;
 
-public class MDF_Game_Contents extends MainDisplayFragment implements View.OnClickListener {
+public class MDF_Game_Contents extends WTMainDisplayFragment implements View.OnClickListener {
 
     // 選択したゲームコンテンツ
     private int selectedContentsNo;

@@ -8,9 +8,10 @@ import android.view.ViewGroup;
 
 import com.example.user.commonfragmentlib.MainDisplayFragment;
 
+import wt.walk_tourist.MDF.WTMainDisplayFragment;
 import wt.walk_tourist.R;
 
-public class MDF_PointManagement extends MainDisplayFragment implements View.OnClickListener {
+public class MDF_PointManagement extends WTMainDisplayFragment implements View.OnClickListener {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

@@ -8,12 +8,13 @@ import android.view.ViewGroup;
 
 import com.example.user.commonfragmentlib.MainDisplayFragment;
 
+import wt.walk_tourist.MDF.WTMainDisplayFragment;
 import wt.walk_tourist.R;
 
 /**
  * Created by taguchi on 2015/06/16.
  */
-public class MDF_StartUp extends MainDisplayFragment implements Runnable{
+public class MDF_StartUp extends WTMainDisplayFragment implements Runnable{
 
     private Thread mLoop;
 

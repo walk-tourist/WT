@@ -11,7 +11,6 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.RelativeLayout;
 
-import com.example.user.commonfragmentlib.CommonActivity;
 import com.example.user.commonfragmentlib.DialogDisplayFragment;
 import com.example.user.commonfragmentlib.MainDisplayFragment;
 import com.example.user.commonfragmentlib.sound.BGM_Player_Service;
@@ -19,6 +18,7 @@ import com.example.user.commonfragmentlib.sound.BGM_Player_Service;
 import wt.walk_tourist.DDF.Ok.DDF_Ok;
 import wt.walk_tourist.DDF.Wait.DDF_Wait;
 import wt.walk_tourist.DDF.Yes_Or_No.DDF_Yes_Or_No;
+import wt.walk_tourist.MDF.WTMainDisplayFragment;
 import wt.walk_tourist.MDF.base.MDF_Base;
 import wt.walk_tourist.MDF.game.MDF_Game_Contents;
 import wt.walk_tourist.MDF.help.MDF_Help;
@@ -30,7 +30,7 @@ import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot_ForPref;
 import wt.walk_tourist.MDF.tourist_spot.MDF_TouristSpot_ForSpot;
 import wt.walk_tourist.MDF.startup.MDF_StartUp;
 
-public class MainActivity extends CommonActivity {
+public class MainActivity extends WTCommonActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +39,11 @@ public class MainActivity extends CommonActivity {
 
         if (  null != savedInstanceState && null != savedInstanceState.getString(BUNDLE_KEY.BUNDLE_KEY_MDF.getKey()) )
         {
-            m_MDF_Name = MainDisplayFragment.MDF_NAME.valueOf(savedInstanceState.getString(BUNDLE_KEY.BUNDLE_KEY_MDF.getKey()));
+            m_MDF_Name = WTMainDisplayFragment.MDF_NAME.valueOf(savedInstanceState.getString(BUNDLE_KEY.BUNDLE_KEY_MDF.getKey()));
         }
         else
         {
-            m_MDF_Name = MainDisplayFragment.MDF_NAME.MDF_START;
+            m_MDF_Name = WTMainDisplayFragment.MDF_NAME.MDF_START;
         }
 
         serviceIntent = new Intent( getBaseContext(), BGM_Player_Service.class);
@@ -89,12 +89,12 @@ public class MainActivity extends CommonActivity {
         }
     }
 
-    public void changeMDF(MainDisplayFragment.MDF_NAME name)
+    public void changeMDF(WTMainDisplayFragment.MDF_NAME name)
     {
         changeMDF(name, FragmentTransaction.TRANSIT_NONE);
     }
 
-    public void changeMDF(MainDisplayFragment.MDF_NAME name, int transaction)
+    public void changeMDF(WTMainDisplayFragment.MDF_NAME name, int transaction)
     {
         m_MDF_Name = name;
 
@@ -239,8 +239,8 @@ public class MainActivity extends CommonActivity {
             }
             else {
 
-                if (m_MDF_Name != MainDisplayFragment.MDF_NAME.MDF_BASE) {
-                    changeMDF(MainDisplayFragment.MDF_NAME.MDF_BASE, FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
+                if (m_MDF_Name != WTMainDisplayFragment.MDF_NAME.MDF_BASE) {
+                    changeMDF(WTMainDisplayFragment.MDF_NAME.MDF_BASE, FragmentTransaction.TRANSIT_FRAGMENT_CLOSE);
                 } else {
                     // TODO アプリケーション終了確認ダイアログを表示する
                     Log.d("hoge", "huge");
